@@ -22,3 +22,18 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+############# My Additions
+
+# JetBrains IDE
+.idea
+
+# MSOffice temp files
+~$*
+.vscode/settings.json
+
+# Docusaurus build
+build/
+
+# Kroki cashed svg's
+kroki
