@@ -1,0 +1,45 @@
+@startuml
+hide circle
+
+'left to right direction
+
+'skinparam linetype ortho
+
+rectangle "Aggregate Bibliotheek" {
+
+    class Bibliotheek <<AR>> {
+        naam
+    }
+}
+
+rectangle "Lid Aggregate\n" {
+
+    class Lid <<Entity>> {
+        naam
+        aantalUitleningen
+        maxAantalUitleningen
+        voegUitleningToe()
+        verwijderUitlening()
+    }
+
+}
+
+rectangle "Boek Aggregate\n" {
+    class Boek <<AR>> {
+            titel
+            leenUit()
+            brengTerug()
+    }
+
+    class Uitlening <<value object>> {
+            startdatum
+            einddatum
+     }
+}
+
+Bibliotheek "1" --> "boeken *" Boek
+Bibliotheek "1" --> "leden *" Lid
+Boek "1" --> "uitlening \n1" Uitlening
+
+
+@enduml
