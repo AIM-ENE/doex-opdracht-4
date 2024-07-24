@@ -1,0 +1,7 @@
+### GET Bestellingen 1
+
+GET http://localhost:8080/bestellingen/1
+
+### GET Bestellingen 2
+
+GET http://localhost:8080/bestellingen/2

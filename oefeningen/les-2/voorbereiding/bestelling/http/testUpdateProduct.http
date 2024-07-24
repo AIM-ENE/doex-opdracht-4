@@ -1,0 +1,19 @@
+### Update prijs van product 1 (tafel) naar 30000 centen
+
+PATCH http://localhost:8080/producten/1/prijs
+Content-Type: application/json
+
+{
+  "aantalCenten": 30000,
+  "valuta": "EUR"
+}
+
+### Update prijs van product 1000 (bestaat niet) naar 0 centen
+
+PATCH http://localhost:8080/producten/1000/prijs
+Content-Type: application/json
+
+{
+  "aantalCenten": 0,
+  "valuta": "EUR"
+}

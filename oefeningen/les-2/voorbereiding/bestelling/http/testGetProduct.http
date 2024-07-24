@@ -1,0 +1,15 @@
+### GET Product 1 (tafel)
+
+GET http://localhost:8080/producten/1
+
+### GET Product 2 (stoel)
+
+GET http://localhost:8080/producten/2
+
+### GET Product 3 (bank)
+
+GET http://localhost:8080/producten/3
+
+### GET de naam van Product 1 (tafel)
+
+GET http://localhost:8080/producten/1/projection

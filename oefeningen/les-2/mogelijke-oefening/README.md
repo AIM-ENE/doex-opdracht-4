@@ -1,1 +1,0 @@
-Deze oefening komt uit week 3 les 3, maar ik vond die les al iets te vol worden, dus misschien dat we deze wel voor app services en/of custom queries kunnen gebruiken
