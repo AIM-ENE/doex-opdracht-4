@@ -60,7 +60,7 @@ Die Query zou er dan als volgt uitzien:
 SELECT *
 FROM bestelling b
 JOIN bestelregel br ON b.id = br.bestelling
-WHERE br.product = 1 AND b.status = 'CONCEPT'
+WHERE br.product = :productId AND b.status = 'CONCEPT'
 ```
 
 </details>
