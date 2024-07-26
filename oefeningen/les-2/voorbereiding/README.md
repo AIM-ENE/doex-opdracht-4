@@ -50,3 +50,17 @@ WHERE br.product = :productId
 ### VRAAG
 
 Je zou de query verder kunnen uitbreiden door alleen te zoeken naar bestellingen waarvan de status op `CONCEPT` staat, want de andere bestellingen kunnen we niet meer aanpassen. Dit is efficiënter, het heeft ook een belangrijk nadeel. Welk nadeel is dit?
+
+Die Query zou er dan als volgt uitzien:
+
+<details>
+    <summary>Toon SQL-query</summary>
+
+```sql
+SELECT *
+FROM bestelling b
+JOIN bestelregel br ON b.id = br.bestelling
+WHERE br.product = 1 AND b.status = 'CONCEPT'
+```
+
+</details>
