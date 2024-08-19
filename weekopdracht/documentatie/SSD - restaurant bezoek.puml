@@ -1,0 +1,63 @@
+@startuml
+
+actor Gast
+participant ":Systeem" as Systeem
+participant ":AllergenenService" as AllergenenService
+
+note over Gast, Systeem
+    let op: aanmelden wordt volledig afgehandeld in de front-end
+end note
+
+Gast -> Systeem:aanmeldenBijTafel(tafelCode)
+Gast <-- Systeem: tafelId
+
+note over Gast, Systeem
+    vanaf hier zijn alle afhandelingen in de back-end
+end note
+
+alt gefilterd menu
+    Gast -> Systeem:getMenuGefilterdOp(restaurantId, condities)
+    Systeem -> AllergenenService:getVoedingRestrictie(ingredientNaam)
+    Systeem <-- AllergenenService: voedingRestricties
+    Gast <-- Systeem: menu
+else else
+    Gast -> Systeem:getMenu(restaurantId)
+    Gast <-- Systeem: menu
+end
+
+opt meer details van een gerecht
+    Gast -> Systeem:getGerechtVanMenu((restaurantId, gerechtNaam)
+    Gast <-- Systeem: gerecht
+end
+
+loop zolang meer bestelling wil plaatsen
+    Gast -> Systeem:getNieuweWinkelmand(restaurantId)
+    Gast <-- Systeem: winkelmandId
+
+    loop voor elk gewenst gerecht
+        Gast -> Systeem:voegGerechtToeAanWinkelmand(restaurantId,winkelmandId,gerechtNaam)
+    end
+
+    opt controleren winkelmand
+        Gast -> Systeem:getWinkelmand(restaurantId,winkelmandId)
+        Gast <-- Systeem: winkelmand
+    end
+
+    Gast -> Systeem:plaatsBestelling(restaurantId, tafelId, winkelmandId)
+    Gast <-- Systeem: bestelNummer
+
+    opt controleren bestelling
+        Gast -> Systeem:getBestelling(restaurantId, tafelId, bestelNummer)
+        Gast <-- Systeem: bestelling
+    end
+
+    opt opvragen rekening
+        Gast -> Systeem:getRekening(tafelId)
+        Gast <-- Systeem: rekeningInValuta
+    end
+end
+
+Gast -> Systeem:betaalRekening(tafelId, contantBedrag)
+Gast <-- Systeem: wisselGeld (of hoogte van resterende bedrag)
+
+@enduml
