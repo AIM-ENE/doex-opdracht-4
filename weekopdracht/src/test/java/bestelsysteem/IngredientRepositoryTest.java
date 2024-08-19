@@ -16,7 +16,9 @@ public class IngredientRepositoryTest {
 
     @Test
     public void testFindByNaam() {
+        //ACT
         Optional<Ingredient> ingredient = ingredientRepository.findByNaam("zalm");
+        //ASSERT
         Assertions.assertTrue(ingredient.isPresent());
     }
 }

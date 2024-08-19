@@ -23,12 +23,16 @@ public class TafelRepositoryTest {
 
     @Test
     public void testFindById() {
+        //ACT
         Optional<Tafel> tafel = tafelRepository.findById(1);
+
+        //ASSERT
         Assertions.assertTrue(tafel.isPresent());
     }
 
     @Test
     public void testMaakBestelling() {
+        //ARRANGE
         Optional<Gerecht> gerecht = gerechtRepository.findByNaam("rib-eye");
         Assertions.assertTrue(gerecht.isPresent());
         Optional<Tafel> tafelOptional = tafelRepository.findById(1);
@@ -36,9 +40,11 @@ public class TafelRepositoryTest {
         List<Gerecht> bestelling = gerecht.stream().toList();
         Tafel tafel = tafelOptional.get();
 
+        //ACT
         tafel.plaatsBestelling(bestelling);
         tafel = tafelRepository.save(tafel);
 
+        //ASSERT
         int laatsteBestelling = tafel.getLaatsteBestelling();
         Optional<Bestelling> bestellingOptional = tafel.getBestelling(laatsteBestelling);
         Assertions.assertTrue(bestellingOptional.isPresent());
@@ -48,6 +54,7 @@ public class TafelRepositoryTest {
 
     @Test
     public void testGetRekening() {
+        //ARRANGE
         Optional<Gerecht> gerecht = gerechtRepository.findByNaam("rib-eye");
         Assertions.assertTrue(gerecht.isPresent());
         Optional<Tafel> tafelOptional = tafelRepository.findById(1);
@@ -55,15 +62,18 @@ public class TafelRepositoryTest {
         List<Gerecht> bestelling = gerecht.stream().toList();
         Tafel tafel = tafelOptional.get();
 
+        //ACT
         tafel.plaatsBestelling(bestelling);
         tafel = tafelRepository.save(tafel);
 
+        //ASSERT
         double rekening = tafel.getRekening();
         Assertions.assertEquals(gerecht.get().prijs(), rekening);
     }
 
     @Test
     public void testBetaalRekening() {
+        //ARRANGE
         Optional<Gerecht> gerecht = gerechtRepository.findByNaam("rib-eye");
         Assertions.assertTrue(gerecht.isPresent());
         Optional<Tafel> tafelOptional = tafelRepository.findById(1);
@@ -71,11 +81,13 @@ public class TafelRepositoryTest {
         List<Gerecht> bestelling = gerecht.stream().toList();
         Tafel tafel = tafelOptional.get();
 
+        //ACT
         tafel.plaatsBestelling(bestelling);
         tafel = tafelRepository.save(tafel);
         tafel.betaalRekening(gerecht.get().prijs());
         tafel = tafelRepository.save(tafel);
 
+        //ASSERT
         Assertions.assertEquals( 0, tafel.getRekening());
     }
 }
