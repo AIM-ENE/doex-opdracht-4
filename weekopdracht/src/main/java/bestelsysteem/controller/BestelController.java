@@ -38,8 +38,14 @@ public class BestelController implements BestelControllerApi {
     //Opdracht: implementeer de bestelcontroller behorend bij de specificatie
 
     @Override
-    public void betaalRekening(Integer tafelnummer, Double contantBedrag) {
-        BestelControllerApi.super.betaalRekening(tafelnummer, contantBedrag);
+    public Double betaalRekening(Integer tafelnummer, Double contantBedrag) {
+        return tafelRepository.findById(tafelnummer)
+                .map(tafel -> {
+                    // als er geen openstaande rekening is, dan krijg je het geld gewoon weer terug
+                    double wisselgeld = tafel.betaalRekening(contantBedrag);
+                    tafelRepository.save(tafel);
+                    return wisselgeld;
+                }).orElse(0.0);
     }
 
     @Override
@@ -91,8 +97,9 @@ public class BestelController implements BestelControllerApi {
     }
 
     @Override
-    public void plaatsBestelling(Integer restaurantId, Integer tafelnummer, Integer winkelmandId) {
+    public Integer plaatsBestelling(Integer restaurantId, Integer tafelnummer, Integer winkelmandId) {
         BestelControllerApi.super.plaatsBestelling(restaurantId, tafelnummer, winkelmandId);
+        return restaurantId;
     }
 
     @Override
