@@ -13,10 +13,12 @@ Voor de eenvoud is deze OpenAPI specificatie al gegeven. En hoef je in deze opdr
 
 Of zelf opstellen of verhaal uit ChatGPT in bestelsysteem/documentatie/casusbeschrijving en bijwerken voorbeelden op basis van schema.sql en data.sql.
 
-Twee subdomeinen, bestellen en voorraadbeheer.
-Sequence diagrammen met operaties invoegen en toelichting.
-En domein model met toelichting.
+- Twee subdomeinen, bestellen en voorraadbeheer (inloggen/tafelzetting buiten scope)
+- Domain stories zowel coarse grained als fine grained, uit de laatste komen de user stories
+- Sequence diagrammen met operaties invoegen en toelichting.
+- En domein model met toelichting.
 
+- Docent heeft een voorbeeld user story map te gebruiken voor beoordelen student uitwerkingen.
 
 
 # Doex opdrachten week 5
