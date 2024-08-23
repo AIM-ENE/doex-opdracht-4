@@ -1,18 +1,25 @@
 package bestelsysteem.controller;
 
+import bestelsysteem.model.Tafel;
 import bestelsysteem.openapi.api.BestelControllerApi;
 import bestelsysteem.openapi.model.*;
 import bestelsysteem.repository.GerechtRepository;
 import bestelsysteem.repository.IngredientRepository;
 import bestelsysteem.repository.RestaurantRepository;
 import bestelsysteem.repository.TafelRepository;
+import bestelsysteem.service.RestaurantService;
 import bestelsysteem.service.TafelService;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 public class BestelController implements BestelControllerApi {
+    private final RestaurantService restaurantService;
     private final RestaurantRepository restaurantRepository;
 
     private final TafelService tafelService;
@@ -22,12 +29,13 @@ public class BestelController implements BestelControllerApi {
     private final IngredientRepository ingredientRepository;
 
 
-    public BestelController(
+    public BestelController(RestaurantService restaurantService,
                             RestaurantRepository restaurantRepository,
                             TafelService tafelService,
                             TafelRepository tafelRepository,
                             GerechtRepository gerechtRepository,
                             IngredientRepository ingredientRepository) {
+        this.restaurantService = restaurantService;
         this.restaurantRepository = restaurantRepository;
         this.tafelService = tafelService;
         this.tafelRepository = tafelRepository;
@@ -57,7 +65,10 @@ public class BestelController implements BestelControllerApi {
 
     @Override
     public Gerecht getGerechtVanMenu(Integer restaurantId, String gerechtNaam) {
-        return BestelControllerApi.super.getGerechtVanMenu(restaurantId, gerechtNaam);
+        return getMenu(restaurantId).getGerechten().stream()
+                .filter(gerecht -> gerechtNaam.equals(gerecht.getNaam()))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
@@ -68,7 +79,9 @@ public class BestelController implements BestelControllerApi {
 
     @Override
     public Menu getMenu(Integer restaurantId) {
-        return BestelControllerApi.super.getMenu(restaurantId);
+        return gerechtRepository.findMenu(restaurantId).flatMap(menu -> restaurantRepository.findById(restaurantId)
+                        .map(restaurant -> restaurantService.filterMenuOpVoorraad(restaurant, menu)))
+                .orElse(null);
     }
 
     @Override
@@ -78,37 +91,92 @@ public class BestelController implements BestelControllerApi {
 
     @Override
     public Integer getNieuweWinkelmand(Integer restaurantId) {
-        return BestelControllerApi.super.getNieuweWinkelmand(restaurantId);
+        return restaurantRepository.findById(restaurantId).map(restaurant -> {
+            bestelsysteem.model.Winkelmand winkelmand = restaurant.maakWinkelmand();
+            restaurant = restaurantRepository.save(restaurant);
+            //TODO: kan dit ook nog op een andere manier gematched worden?
+            return restaurant.getWinkelmandOnDate(winkelmand.datumTijd())
+                    .map(bestelsysteem.model.Winkelmand::id).orElse(-1);
+        }).orElse(null);
     }
 
     @Override
     public Double getRekening(Integer tafelnummer) {
-        return BestelControllerApi.super.getRekening(tafelnummer);
+        return tafelRepository.findById(tafelnummer).map(Tafel::getRekening).orElse(0.0);
     }
 
     @Override
     public List<Voorraad> getVoorraad(Integer restaurantId) {
-        return BestelControllerApi.super.getVoorraad(restaurantId);
+        // concrete cast: https://stackoverflow.com/questions/5082044/most-efficient-way-to-cast-listsubclass-to-listbaseclass
+        return new ArrayList<Voorraad>(restaurantRepository.findById(restaurantId)
+                .map(restaurantService::getVoorraad)
+                .orElse(new ArrayList<>()));
     }
 
     @Override
     public Winkelmand getWinkelmand(Integer restaurantId, Integer winkelmandId) {
-        return BestelControllerApi.super.getWinkelmand(restaurantId, winkelmandId);
+        return restaurantRepository.findById(restaurantId).flatMap(restaurant ->
+                restaurant.getWinkelmand(winkelmandId)
+                        .map(this::converteerWinkelmandNaarDTO))
+                .orElse(null);
     }
 
     @Override
     public Integer plaatsBestelling(Integer restaurantId, Integer tafelnummer, Integer winkelmandId) {
-        BestelControllerApi.super.plaatsBestelling(restaurantId, tafelnummer, winkelmandId);
-        return restaurantId;
+        //TODO: eigenlijk zou dit transactioneel moeten zijn, bestelling slaagt alleen wanneer de winkelmand ook verwijderd is
+        //TODO: zou dit naar een application service moeten?
+        return restaurantRepository.findById(restaurantId).map(restaurant -> {
+            return restaurant.getWinkelmand(winkelmandId).map(winkelmand -> {
+                Optional<Tafel> tafelOptional = tafelRepository.findById(tafelnummer);
+                return tafelOptional.map(tafel -> {
+                    Integer bestelNummer = tafelService.plaatsBestelling(tafel, getGerechten(winkelmand));
+                    if (bestelNummer > 0) {
+                        restaurant.verwijderWinkelmand(winkelmand);
+                        restaurantRepository.save(restaurant);
+                    }
+                    return bestelNummer;
+                }).orElse(-1); //TODO: error handling
+            }).orElse(-1); //TODO: error handling
+        }).orElse(-1); //TODO: error handling
     }
 
     @Override
     public void voegGerechtToeAanWinkelmand(Integer restaurantId, Integer winkelmandId, String gerechtNaam) {
-        BestelControllerApi.super.voegGerechtToeAanWinkelmand(restaurantId, winkelmandId, gerechtNaam);
+        restaurantRepository.findById(restaurantId).flatMap(restaurant ->
+            gerechtRepository.findByNaam(gerechtNaam).map(gerecht ->
+                    restaurantService.plaatsGerechtInWinkelmand(restaurant, winkelmandId, gerecht)));
     }
 
     @Override
     public void voegIngredientToeAanVoorraad(Integer restaurantId, Integer ingredientId, Integer aantal) {
-        BestelControllerApi.super.voegIngredientToeAanVoorraad(restaurantId, ingredientId, aantal);
+        restaurantRepository.findById(restaurantId).ifPresent(restaurant -> {
+            restaurant.voegToeAanVoorraad(ingredientId, aantal);
+            restaurantRepository.save(restaurant);
+        });
+    }
+
+    private List<bestelsysteem.model.Gerecht> getGerechten(bestelsysteem.model.Winkelmand winkelmand) {
+        //TODO: je zou hier heel mooi een custom query voor kunnen schrijven
+        return winkelmand.gerechten().stream().map(
+                        winkelmandGerecht -> gerechtRepository.findById(
+                                Objects.requireNonNull(winkelmandGerecht.gerecht().getId())))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toList());
+    }
+
+    //TODO: zou dit naar een service moeten, bijvoorbeeld restaurantService?
+    private Winkelmand converteerWinkelmandNaarDTO(bestelsysteem.model.Winkelmand winkelmand) {
+        return new bestelsysteem.dto.Winkelmand(winkelmand.gerechten().stream().map(winkelmandGerecht ->
+                        gerechtRepository.findById(Objects.requireNonNull(winkelmandGerecht.gerecht().getId()))
+                                .map(gerecht -> {
+                                    WinkelmandGerecht winkelmandGerechtNew = new WinkelmandGerecht();
+                                    winkelmandGerechtNew.setId(gerecht.id());
+                                    winkelmandGerechtNew.setNaam(gerecht.naam());
+                                    return winkelmandGerechtNew;
+                                }))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toList()));
     }
 }
