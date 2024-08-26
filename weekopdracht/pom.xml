@@ -43,13 +43,6 @@
             <version>2.2.224</version>
             <scope>runtime</scope>
         </dependency>
-
-        <!-- onderstaande dependency is nodig voor het genereren van de swagger UI -->
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.3.0</version>
-        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
