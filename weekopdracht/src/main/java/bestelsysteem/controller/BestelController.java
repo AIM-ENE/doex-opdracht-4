@@ -1,5 +1,6 @@
 package bestelsysteem.controller;
 
+import bestelsysteem.dto.VoedingRestrictie;
 import bestelsysteem.model.Tafel;
 import bestelsysteem.openapi.api.BestelControllerApi;
 import bestelsysteem.openapi.model.*;
@@ -7,15 +8,15 @@ import bestelsysteem.repository.GerechtRepository;
 import bestelsysteem.repository.IngredientRepository;
 import bestelsysteem.repository.RestaurantRepository;
 import bestelsysteem.repository.TafelRepository;
+import bestelsysteem.service.AllergenenService;
+import bestelsysteem.service.AllergenenServiceImpl;
 import bestelsysteem.service.RestaurantService;
 import bestelsysteem.service.TafelService;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 public class BestelController implements BestelControllerApi {
@@ -28,6 +29,7 @@ public class BestelController implements BestelControllerApi {
     private final GerechtRepository gerechtRepository;
     private final IngredientRepository ingredientRepository;
 
+    private final AllergenenService allergenenService;
 
     public BestelController(RestaurantService restaurantService,
                             RestaurantRepository restaurantRepository,
@@ -41,6 +43,8 @@ public class BestelController implements BestelControllerApi {
         this.tafelRepository = tafelRepository;
         this.gerechtRepository = gerechtRepository;
         this.ingredientRepository = ingredientRepository;
+
+        allergenenService = new AllergenenServiceImpl();
     }
 
     //Opdracht: implementeer de bestelcontroller behorend bij de specificatie
@@ -79,14 +83,27 @@ public class BestelController implements BestelControllerApi {
 
     @Override
     public Menu getMenu(Integer restaurantId) {
-        return gerechtRepository.findMenu(restaurantId).flatMap(menu -> restaurantRepository.findById(restaurantId)
-                        .map(restaurant -> restaurantService.filterMenuOpVoorraad(restaurant, menu)))
-                .orElse(null);
+        return restaurantRepository.findById(restaurantId).flatMap(restaurant ->
+                gerechtRepository.findMenu(restaurant.id())
+                .map(menu -> restaurantService.filterMenuOpVoorraad(restaurant, menu))).orElse(null);
     }
 
     @Override
-    public Menu getMenuGefilterdOp(Integer restaurantId, String condities) {
-        return BestelControllerApi.super.getMenuGefilterdOp(restaurantId, condities);
+    public Menu getMenuGefilterdOp(Integer restaurantId, List<String> condities) {
+        //TODO: waar zou de afhandeling van deze verantwoordelijkheid moeten liggen, restaurantService?
+        Menu menu = new Menu();
+        menu.setGerechten(getMenu(restaurantId).getGerechten().stream().filter(gerecht -> {
+            for (GerechtIngredient gerechtIngredient : gerecht.getIngredienten()) {
+                Set<VoedingRestrictie> restrictiesIngredient = allergenenService.getVoedingRestrictie(
+                        gerechtIngredient.getNaam());
+                Set<String> restricties = restrictiesIngredient.stream().map(Enum::name).collect(Collectors.toSet());
+                if(condities.stream().anyMatch(restricties::contains)) {
+                    return false;
+                }
+            }
+            return true;
+        }).collect(Collectors.toList()));
+        return menu;
     }
 
     @Override

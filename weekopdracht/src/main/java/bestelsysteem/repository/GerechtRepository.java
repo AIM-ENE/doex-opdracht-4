@@ -41,7 +41,7 @@ public interface GerechtRepository extends CrudRepository<Gerecht, Integer> {
             }
             Menu menu = new Menu();
             menu.setGerechten(List.copyOf(gerechtMap.values()));
-            return new Menu();
+            return menu;
         }
 
         private void mapRow(ResultSet rs) throws SQLException {
@@ -61,7 +61,7 @@ public interface GerechtRepository extends CrudRepository<Gerecht, Integer> {
             GerechtIngredient gerechtIngredient = new GerechtIngredient();
             gerechtIngredient.setNaam(ingredientNaam);
             gerechtIngredient.setHoeveelheid(ingredientHoeveelheid);
-            gerecht.getIngredienten().add(gerechtIngredient);
+            gerecht.addIngredientenItem(gerechtIngredient);
         }
     }
 }
