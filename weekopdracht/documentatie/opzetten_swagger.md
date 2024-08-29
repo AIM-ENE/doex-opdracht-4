@@ -55,7 +55,9 @@ Wanneer je een extra uitdaging zoekt kun je op basis van de API specificatie ook
 </build>
 ```
 
-Voor meer informatie zie deze links:
+## Links:
+
+- https://medium.com/xgeeks/api-first-using-openapi-and-spring-boot-2602c04bb0d3
 - https://mydeveloperplanet.com/2022/02/08/generate-server-code-using-openapi-generator/
 - https://medium.com/@bbakla/exploring-openapi-with-spring-boot-3-maven-and-gradle-usage-87c9bebf74c2
 - https://openapi-generator.tech/docs/generators/java/
