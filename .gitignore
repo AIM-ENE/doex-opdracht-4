@@ -1,3 +1,6 @@
+HELP.md
+target/
+
 # Compiled class file
 *.class
 
@@ -86,3 +89,7 @@ build/
 
 # Kroki cashed svg's
 kroki
+
+# Drawio temp files
+
+.$
