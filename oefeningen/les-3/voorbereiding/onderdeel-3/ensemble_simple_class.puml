@@ -1,0 +1,33 @@
+@startuml
+
+hide circle
+
+rectangle "Ensemble Aggregate" {
+
+    class Ensemble <<Aggregate Root>> {
+        id: Integer
+        name: String
+        joinAsParticipant(member)
+    }
+
+    class Participant <<Value Object>> {
+
+    }
+}
+
+rectangle "Member Aggregate" {
+
+    class Member <<Aggregate Root>> {
+        id: Integer
+        name: String
+
+    }
+
+    class Email <<Value Object>> {
+        mailAddress: String
+}
+
+Ensemble "1" --> "participants *" Participant
+Participant "1" -r-> "member 1" Member: "\t\t"
+Member "1" -u-> "email 1" Email
+@enduml
