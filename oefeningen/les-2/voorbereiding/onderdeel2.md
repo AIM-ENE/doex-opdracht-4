@@ -4,15 +4,18 @@
 > De code is te vinden in de map `bestelling`.
 > Open deze map in een aparte idea window.
 
-## Opdrachten bij Custom Projections
+## Derived Query
 
-- Maak in het bestand `bestelling/src/../dto/ProductNaamDTO` een record die alleen een `String naam` bevat. 
+> [!NOTE]
+> In deze opdracht gebruik je ProductNaamDTO. Dit bestand bestaat al, maar is leeg.
 
-- Declareer in de interface ProductRepository een methode die `ProductNaamDTO` teruggeeft op basis van het meegegeven `id` van het product. Gebruik hiervoor de 'derived query regels' en niet de `@Query` annotatie.
+- Maak in `dto/ProductNaamDTO.java`een record die alleen een `String naam` bevat. 
 
-- Haal regels 35 tot en met 38 van  `bestelling/src/../controller/ProductController` uit commentaar en test de implementatie met het onderste http GET request in het bestand `bestelling/http/testGetProduct.http` 
+- Declareer in de interface `ProductRepository` een methode die `ProductNaamDTO` teruggeeft op basis van het meegegeven `id` van het product. Gebruik hiervoor de 'derived query regels' en niet de `@Query` annotatie.
 
-## Opdrachten bij 
+- Haal regels 35 tot en met 38 van `ProductController` uit commentaar en test de implementatie met het onderste http GET request in het bestand `bestelling/http/testGetProduct.http` 
+
+## @Query 
 
 In Opdracht 1 heb je het onderstaande stuk code verplaatst naar een eigen service. 
 
@@ -27,9 +30,8 @@ Het nadeel van bovenstaande code is dat `findAll` alle bestellingen ophaalt, ter
 
 - Declareer in de interface `bestelling/src/../repository/BestellingRepository` een methode die alle bestellingen ophaalt die een bepaald product bevatten. Gebruik hiervoor de `@Query`-annotatie en een custom Query.
 
-**Hint:** 
-
-Als je het leuk vindt en voldoende tijd hebt, kun je zelf de query bedenken die je nodig hebt. Anders kun je de SQL-query die hieronder staat gebruiken. 
+> [!HINT]
+> Als je het leuk vindt en voldoende tijd hebt, kun je zelf de query bedenken die je nodig hebt. Anders kun je de SQL-query die hieronder staat gebruiken. 
 
 <details>
     <summary>Toon SQL-query</summary>
@@ -45,18 +47,4 @@ WHERE br.product = :productId
 
 ### VRAAG
 
-Je zou de query verder kunnen uitbreiden door alleen te zoeken naar bestellingen waarvan de status op `CONCEPT` staat, want de andere bestellingen kunnen we niet meer aanpassen. Dit is efficiënter, het heeft ook een belangrijk nadeel. Welk nadeel is dit?
-
-Die Query zou er dan als volgt uitzien:
-
-<details>
-    <summary>Toon SQL-query</summary>
-
-```sql
-SELECT *
-FROM bestelling b
-JOIN bestelregel br ON b.id = br.bestelling
-WHERE br.product = :productId AND b.status = 'CONCEPT'
-```
-
-</details>
+Je zou de query verder kunnen uitbreiden door alleen te zoeken naar bestellingen waarvan de status op `CONCEPT` staat, want de andere bestellingen kunnen we niet meer aanpassen. Dit is efficiënter, maar heeft ook een nadeel. Welk nadeel zou dit kunnen zijn?
