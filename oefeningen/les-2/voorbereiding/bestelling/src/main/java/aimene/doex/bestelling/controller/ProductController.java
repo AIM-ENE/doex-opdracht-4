@@ -32,7 +32,7 @@ public class ProductController {
         return product;
     }
 
-//    @GetMapping("{id}/projection")
+//    @GetMapping("{id}/productnaam")
 //    public ProductNaamDTO findProductNaamById(@PathVariable("id") Integer productId) {
 //
 //    }

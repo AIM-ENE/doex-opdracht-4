@@ -28,7 +28,7 @@ bestellingRepository.findAll().forEach(bestelling -> {
 
 Het nadeel van bovenstaande code is dat `findAll` alle bestellingen ophaalt, terwijl we alleen de bestellingen nodig hebben die het product bevatten waarvan de prijs is aangepast. Over het algemeen is het sneller om de database te laten filteren dan dit in Java te doen.
 
-:point_right: Declareer in de interface `bestelling/src/../repository/BestellingRepository` een methode die alle bestellingen ophaalt die een bepaald product bevatten. Gebruik hiervoor de `@Query`-annotatie en een custom Query.
+:point_right: Declareer in de interface `BestellingRepository` een methode die alle bestellingen ophaalt die een bepaald product bevatten. Gebruik hiervoor de `@Query`-annotatie en een custom Query.
 
 > [!TIP]
 > Als je het leuk vindt en voldoende tijd hebt, kun je zelf de query bedenken die je nodig hebt. Anders kun je de SQL-query die hieronder staat gebruiken:
