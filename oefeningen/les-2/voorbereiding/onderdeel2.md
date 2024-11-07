@@ -31,10 +31,10 @@ Het nadeel van bovenstaande code is dat `findAll` alle bestellingen ophaalt, ter
 - Declareer in de interface `bestelling/src/../repository/BestellingRepository` een methode die alle bestellingen ophaalt die een bepaald product bevatten. Gebruik hiervoor de `@Query`-annotatie en een custom Query.
 
 > [!TIP]
-> Als je het leuk vindt en voldoende tijd hebt, kun je zelf de query bedenken die je nodig hebt. Anders kun je de SQL-query die hieronder staat gebruiken. 
+> Als je het leuk vindt en voldoende tijd hebt, kun je zelf de query bedenken die je nodig hebt. Anders kun je de SQL-query die hieronder staat gebruiken:
 
 <details>
-    <summary>Toon SQL-query</summary>
+    <summary><b>Toon SQL-query</b></summary>
     
 ```sql
 SELECT *
