@@ -60,10 +60,12 @@ Bestelling "1" --> "bestelregels \n" Bestelregel: "\t"
 Bestelregel "1" --> "\nproduct 1" Product
 ' ---
 
-
-' --- JOUW UITWERKING Onderdeel b ---
-' Plaats hieronder de relaties tussen klassen die NIET zijn toegestaan
-
+' --- Antwoord ---
+ProductRepository ..> ProductService : <:question:>
+BestellingRepository .u.> ProductService : <:question:>
+ProductService ..> ProductController : <:question:>
+Bestelling ..> BestellingRepository : <:question:>
+Product ...u.> ProductRepository : <:question:>
 
 @enduml
 
