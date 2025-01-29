@@ -1,0 +1,71 @@
+@startuml
+hide circle
+
+'left to right direction
+'skinparam linetype ortho
+'skinparam linetype polyline
+
+
+package "Controller" {
+    class ProductController
+}
+
+package "Service" {
+    class ProductService
+}
+
+package "Repository" {
+    interface BestellingRepository
+    interface ProductRepository
+}
+
+package "Domain" {
+
+    rectangle "Bestelling Aggregate" {
+
+        class Bestelling <<Aggregate Root>> {
+            id: Integer
+            status: Status
+            totaalPrijs: Geld
+            plaatsBestelling()
+            voegProductToe(product, aantal, prijs)
+            veranderStukPrijs(product, nieuwePrijs)
+        }
+
+        class Bestelregel <<Entity>> {
+            aantal: int
+            stukPrijs: Geld
+            getRegelPrijs(): Geld
+        }
+    }
+
+    rectangle "Product Aggregate" {
+        class Product <<Aggregate Root>> {
+          id: Integer
+          naam: String
+          prijs: Geld
+        }
+
+    }
+}
+
+' --- Hidden associaties zodat alle packages netjes van boven naar beneden getekend worden
+"Controller" -[hidden]- "Service"
+"Service" -[hidden]- "Repository"
+"Repository" -[hidden]- "Domain"
+' ---
+
+' --- Domain associaties ---
+Bestelling "1" --> "bestelregels \n" Bestelregel: "\t"
+Bestelregel "1" --> "\nproduct 1" Product
+' ---
+
+' --- Antwoord ---
+ProductRepository ..> ProductService : <:question:>
+BestellingRepository .u.> ProductService : <:question:>
+ProductService ..> ProductController : <:question:>
+Bestelling ..> BestellingRepository : <:question:>
+Product ...u.> ProductRepository : <:question:>
+
+@enduml
+

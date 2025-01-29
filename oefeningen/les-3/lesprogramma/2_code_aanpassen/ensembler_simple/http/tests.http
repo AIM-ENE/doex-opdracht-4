@@ -1,0 +1,13 @@
+### GET Member 3 (Jack)
+
+GET http://localhost:8080/members/3
+
+
+### Add Jack to ensemble 1
+
+POST http://localhost:8080/members/3/ensembles/1/join
+
+
+### Add Jill to ensemble 1
+
+POST http://localhost:8080/members/4/ensembles/1/join
