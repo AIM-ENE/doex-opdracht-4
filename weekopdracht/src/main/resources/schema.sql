@@ -25,15 +25,6 @@ CREATE TABLE Dosering (
     FOREIGN KEY (ingredient) REFERENCES Ingredient(id)
 );
 
-CREATE TABLE Voorraad (
-    restaurant INT NOT NULL,
-    ingredient INT NOT NULL,
-    aantal INT NOT NULL,
-    UNIQUE (restaurant, ingredient),
-    FOREIGN KEY (restaurant) REFERENCES Restaurant(id),
-    FOREIGN KEY (ingredient) REFERENCES Ingredient(id)
-);
-
 CREATE TABLE Winkelmand (
     id INT PRIMARY KEY AUTO_INCREMENT,
     restaurant INT NOT NULL,
@@ -45,19 +36,24 @@ CREATE TABLE Winkelmand_Gerecht (
     id INT PRIMARY KEY AUTO_INCREMENT,
     winkelmand INT NOT NULL,
     gerecht INT NOT NULL,
+    UNIQUE (winkelmand, gerecht),
     FOREIGN KEY (winkelmand) REFERENCES Winkelmand(id),
     FOREIGN KEY (gerecht) REFERENCES Gerecht(id)
 );
 
 CREATE TABLE Tafel (
-    tafel_nummer INT PRIMARY KEY,
-    rekening DOUBLE
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    tafel_nummer INT NOT NULL,
+    rekening DOUBLE,
+    restaurant INT NOT NULL,
+    FOREIGN KEY (restaurant) REFERENCES Restaurant(id)
 );
 
 CREATE TABLE Bestelling (
     id INT PRIMARY KEY AUTO_INCREMENT,
+    status INT NOT NULL,
     tafel INT NOT NULL,
-    FOREIGN KEY (tafel) REFERENCES Tafel(tafel_nummer)
+    FOREIGN KEY (tafel) REFERENCES Tafel(id)
 );
 
 CREATE TABLE Bestelling_Gerecht (

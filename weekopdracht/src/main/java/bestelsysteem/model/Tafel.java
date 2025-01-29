@@ -10,10 +10,16 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Tafel {
-    private @Id @JsonIgnore int tafelNummer;
+    private @Id @JsonIgnore int id;
+    private int tafelNummer;
     private double rekening;
+    private AggregateReference<Restaurant, Integer> restaurant;
     //belangrijk om hier geen set te gebruiken, omdat je dan niet twee keer exact dezelfde bestelling kan doen
     private @MappedCollection(idColumn = "TAFEL", keyColumn = "ID") List<Bestelling> bestellingen;
+
+    public int getTafelNummer() {
+        return tafelNummer;
+    }
 
     public double getRekening() {
         return rekening;
@@ -42,7 +48,6 @@ public class Tafel {
     public double betaalRekening(double bedrag) {
         double rekeningNaBedrag = rekening - bedrag;
         if(rekeningNaBedrag <= 0) {
-            bestellingen.clear();
             rekening = 0;
         } else {
             rekening = rekeningNaBedrag;

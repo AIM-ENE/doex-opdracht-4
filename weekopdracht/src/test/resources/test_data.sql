@@ -21,7 +21,7 @@ INSERT INTO Dosering (gerecht, ingredient, hoeveelheid) VALUES (2, 3, 100);
 INSERT INTO Dosering (gerecht, ingredient, hoeveelheid) VALUES (3, 4, 100);
 
 -- Inserting data into Tafel table
-INSERT INTO Tafel(tafel_nummer) VALUES ( 1 );
-INSERT INTO Tafel(tafel_nummer) VALUES ( 3 );
-INSERT INTO Tafel(tafel_nummer) VALUES ( 4 );
-INSERT INTO Tafel(tafel_nummer) VALUES ( 5 );
+INSERT INTO Tafel(restaurant, tafel_nummer) VALUES ( 1, 1 );
+INSERT INTO Tafel(restaurant, tafel_nummer) VALUES ( 1, 3 );
+INSERT INTO Tafel(restaurant, tafel_nummer) VALUES ( 1, 4 );
+INSERT INTO Tafel(restaurant, tafel_nummer) VALUES ( 1, 5 );

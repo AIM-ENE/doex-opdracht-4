@@ -27,50 +27,6 @@ public class RestaurantRepositoryTest {
     }
 
     @Test
-    public void testVoorraadBijvullen() {
-        //ARRANGE
-        Optional<Restaurant> restaurantOptional = restaurantRepository.findById(1);
-        Assertions.assertTrue(restaurantOptional.isPresent());
-        Restaurant restaurant = restaurantOptional.get();
-        int voorraad = restaurant.getVoorraad(1).getAantal();
-
-        //ACT
-        restaurant.voegToeAanVoorraad(1, 100);
-        restaurant = restaurantRepository.save(restaurant);
-
-        //ASSERT
-        Voorraad voorraadNaBijvullen = restaurant.getVoorraad(1);
-        Assertions.assertEquals(voorraad+100,
-                voorraadNaBijvullen.getAantal());
-    }
-
-    @Test
-    public void testVoorraadReduceren() {
-        //ARRANGE
-        Optional<Gerecht> gerechtOptional = gerechtRepository.findByNaam("rib-eye");
-        Assertions.assertTrue(gerechtOptional.isPresent());
-        Gerecht gerecht = gerechtOptional.get();
-        Optional<Dosering> doseringIngredientOptional = gerecht.doseringVanIngredient().stream()
-                .findFirst();
-        Assertions.assertTrue(doseringIngredientOptional.isPresent());
-        Dosering dosering = doseringIngredientOptional.get();
-        Integer ingredientId = dosering.ingredient().getId();
-        Optional<Restaurant> restaurantOptional = restaurantRepository.findById(1);
-        Assertions.assertTrue(restaurantOptional.isPresent());
-        Restaurant restaurant = restaurantOptional.get();
-
-        //ACT
-        restaurant.voegToeAanVoorraad(1, dosering.hoeveelheid());
-        int voorraad = restaurant.getVoorraad(ingredientId).getAantal();
-        restaurant.reduceerVoorraad(gerecht);
-        restaurant = restaurantRepository.save(restaurant);
-
-        //ASSERT
-        int voorraadNaGerecht = restaurant.getVoorraad(ingredientId).getAantal();
-        Assertions.assertEquals(voorraad-dosering.hoeveelheid(), voorraadNaGerecht);
-    }
-
-    @Test
     public void testAanmakenWinkelmand() {
         //ARRANGE
         Optional<Restaurant> restaurantOptional = restaurantRepository.findById(1);

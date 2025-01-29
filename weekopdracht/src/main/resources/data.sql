@@ -29,19 +29,8 @@ INSERT INTO Dosering (gerecht, ingredient, hoeveelheid) VALUES (3, 7, 1); -- 1 p
 INSERT INTO Dosering (gerecht, ingredient, hoeveelheid) VALUES (3, 2, 200); -- 200 grams of tomato sauce for Margherita Pizza
 INSERT INTO Dosering (gerecht, ingredient, hoeveelheid) VALUES (3, 8, 300); -- 300 grams of mozzarella cheese for Margherita Pizza
 
--- Inserting data into Voorraad table for one Spaghetti
-INSERT INTO Voorraad(restaurant, ingredient, aantal) VALUES ( 1, 1, 200 );
-INSERT INTO Voorraad(restaurant, ingredient, aantal) VALUES ( 1, 2, 300 );
-INSERT INTO Voorraad(restaurant, ingredient, aantal) VALUES ( 1, 3, 400 );
-
-INSERT INTO Voorraad(restaurant, ingredient, aantal) VALUES ( 1, 4, 150 );
-INSERT INTO Voorraad(restaurant, ingredient, aantal) VALUES ( 1, 5, 50 );
-INSERT INTO Voorraad(restaurant, ingredient, aantal) VALUES ( 1, 6, 30 );
-INSERT INTO Voorraad(restaurant, ingredient, aantal) VALUES ( 1, 7, 1 );
-INSERT INTO Voorraad(restaurant, ingredient, aantal) VALUES ( 1, 8, 300 );
-
 -- Inserting data into Tafel table
-INSERT INTO Tafel(tafel_nummer) VALUES ( 1 );
-INSERT INTO Tafel(tafel_nummer) VALUES ( 3 );
-INSERT INTO Tafel(tafel_nummer) VALUES ( 4 );
-INSERT INTO Tafel(tafel_nummer) VALUES ( 5 );
+INSERT INTO Tafel(restaurant, tafel_nummer) VALUES ( 1, 1 );
+INSERT INTO Tafel(restaurant, tafel_nummer) VALUES ( 1, 3 );
+INSERT INTO Tafel(restaurant, tafel_nummer) VALUES ( 1, 4 );
+INSERT INTO Tafel(restaurant, tafel_nummer) VALUES ( 1, 5 );
