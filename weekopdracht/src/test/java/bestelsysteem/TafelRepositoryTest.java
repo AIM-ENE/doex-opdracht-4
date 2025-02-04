@@ -1,6 +1,7 @@
-package bestelsysteem;
+package bestelsysteem.domein;
 
 import bestelsysteem.model.Bestelling;
+import bestelsysteem.model.BestellingStatus;
 import bestelsysteem.model.Gerecht;
 import bestelsysteem.model.Tafel;
 import bestelsysteem.repository.GerechtRepository;
@@ -45,11 +46,10 @@ public class TafelRepositoryTest {
         tafel = tafelRepository.save(tafel);
 
         //ASSERT
-        int laatsteBestelling = tafel.getLaatsteBestelling();
-        Optional<Bestelling> bestellingOptional = tafel.getBestelling(laatsteBestelling);
+        Optional<Bestelling> bestellingOptional = tafel.getLaatsteBestelling();
         Assertions.assertTrue(bestellingOptional.isPresent());
         Assertions.assertEquals(bestelling.getFirst().id(),
-                bestellingOptional.get().gerechten().getFirst().gerecht().getId());
+                bestellingOptional.get().getGerechten().getFirst().gerecht().getId());
     }
 
     @Test
@@ -89,5 +89,7 @@ public class TafelRepositoryTest {
 
         //ASSERT
         Assertions.assertEquals( 0, tafel.getRekening());
+        Assertions.assertEquals(tafel.getLaatsteBestelling().map(Bestelling::getStatus)
+                .orElse(null), BestellingStatus.PAID);
     }
 }

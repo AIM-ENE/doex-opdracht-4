@@ -27,31 +27,38 @@ public class Tafel {
 
     public Optional<Bestelling> getBestelling(int bestelnummer) {
         return bestellingen.stream()
-                .filter(bestelling -> bestelling.id().equals(bestelnummer))
+                .filter(bestelling -> bestelling.getId().equals(bestelnummer))
                 .findFirst();
     }
 
-    public int getLaatsteBestelling() {
-        //TODO: goede manier vinden om te bepalen wat het bestelnummer is van de laatst geplaatste bestelling...
-        return bestellingen.getLast().id();
+    public Optional<Bestelling> getLaatsteBestelling() {
+        return Optional.ofNullable(bestellingen.getLast());
     }
 
     public void plaatsBestelling(List<Gerecht> gerechten) {
         List<BestellingGerecht> bestellingGerechten = gerechten.stream().map(gerecht ->
-                new BestellingGerecht(AggregateReference.to(gerecht.id()))).collect(Collectors.toList());
-        bestellingen.add(new Bestelling(bestellingGerechten));
-
-        Double subTotaal = gerechten.stream().map(Gerecht::prijs).reduce(0.0, Double::sum);
+                new BestellingGerecht(AggregateReference.to(gerecht.id()), gerecht.prijs())).collect(Collectors.toList());
+        double subTotaal = bestellingGerechten.stream().map(BestellingGerecht::prijs).reduce(0.0, Double::sum);
+        bestellingen.add(new Bestelling(bestellingGerechten, subTotaal));
         rekening += subTotaal;
     }
 
     public double betaalRekening(double bedrag) {
-        double rekeningNaBedrag = rekening - bedrag;
-        if(rekeningNaBedrag <= 0) {
-            rekening = 0;
-        } else {
-            rekening = rekeningNaBedrag;
+        double restBedrag = bedrag;
+        for(Bestelling bestelling : bestellingen) {
+            if(restBedrag > 0) {
+                if(bestelling.getStatus() == BestellingStatus.OPEN) {
+                    double subRekening = bestelling.getRekening();
+                    if (restBedrag >= subRekening) {
+                        bestelling.setPaid();
+                        restBedrag -= subRekening;
+                        rekening -= subRekening;
+                    }
+                }
+            } else {
+                break;
+            }
         }
-        return rekeningNaBedrag;
+        return restBedrag;
     }
 }

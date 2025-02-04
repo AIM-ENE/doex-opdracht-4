@@ -219,7 +219,7 @@
         },
         "responses": {
           "200": {
-            "description": "retourneert wisselgeld als negatief getal",
+            "description": "retourneert wisselgeld",
             "content": {
               "application/json": {
                 "schema": {

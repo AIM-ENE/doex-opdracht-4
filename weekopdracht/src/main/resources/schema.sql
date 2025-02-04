@@ -51,7 +51,8 @@ CREATE TABLE Tafel (
 
 CREATE TABLE Bestelling (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    status INT NOT NULL,
+    status ENUM('OPEN', 'PAID') NOT NULL,
+    rekening DOUBLE,
     tafel INT NOT NULL,
     FOREIGN KEY (tafel) REFERENCES Tafel(id)
 );
@@ -60,6 +61,7 @@ CREATE TABLE Bestelling_Gerecht (
     id INT PRIMARY KEY AUTO_INCREMENT,
     bestelling INT NOT NULL,
     gerecht INT NOT NULL,
+    prijs DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (bestelling) REFERENCES Bestelling(id),
     FOREIGN KEY (gerecht) REFERENCES Gerecht(id)
 );
