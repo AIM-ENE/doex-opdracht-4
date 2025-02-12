@@ -12,7 +12,6 @@ we kunnen op basis hiervan user stories opstellen bij de verschillende activitei
 2. Als gast wil ik de menukaart kunnen bekijken zodat ik een gerecht naar wens kan uitkiezen
 3. Als een gast wil ik de menukaart kunnen filteren op basis van voedingsrestricties zodat ik alleen gerechten zie met die criteria
 4. Als gast wil ik details van een gerecht kunnen bekijken zodat ik weet wat voor ingrediënten daarin zitten
-- Als gast wil ik reviews van een gerecht kunnen bekijken zodat ik weet wat andere gasten daarvan vonden
 5. Als gast wil ik een gekozen gerecht van de menukaart toevoegen aan de winkelmand zodat deze besteld kan worden
 6. Als gast wil ik een winkelmand kunnen omzetten naar bestelling zodat ik deze geserveerd krijg
 
@@ -25,7 +24,8 @@ we kunnen op basis hiervan user stories opstellen bij de verschillende activitei
 > - Als gast wil ik kunnen zien wat de verwachte levertijd is van mijn bestelling zodat ik mijn verwachting daarop kan bijstellen
 >
 > - Als gast wil ik het maandmenu kunnen bekijken
->
+> 
+> - Als gast wil ik reviews van een gerecht kunnen bekijken zodat ik weet wat andere gasten daarvan vonden
 
 ## Betalen rekening
 

@@ -2,15 +2,18 @@
 
 ## Weekopdracht
 
-De weekopdracht draait rondom een Restaurant casus hieronder beschreven in [Restaurant casus](#restaurant-casus).
+De weekopdracht draait rondom een Restaurant casus beschreven in [Restaurant casus](documentatie/restaurant-casus.md).
 
 De opdracht is om de endpoints aan te vullen voor een nog later te bouwen front-end (buiten scope van deze weekopdracht).
+
 De repository bevat al starter code, implementatie van de domeinlaag en gedeeltelijk ook services, custom queries en controller implementatie.
+
 Echter zijn er nog een aantal gaten door jullie in te vullen:
 
 - TODO...
 
 Hierbij is het de bedoeling dat jullie de relatie kunnen leggen tussen de domeinlaag en API gebruikmakend van `hexagonal architecture`.
+
 Hiervoor moeten jullie (na les 3) in de architectuur kunnen aangeven welk object in welke laag thuishoort in [jouw uitwerking](jouw_uitwerking.drawio).
 Neem dit mee naar les 4.
 
