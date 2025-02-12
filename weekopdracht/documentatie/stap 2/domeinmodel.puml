@@ -68,13 +68,13 @@ rectangle "Gerecht Aggregate\n" {
     class Gerecht <<Aggregate Root>> {
         - id : Integer
         - naam: String
-        - categorie: Categorie
+        - gang: Gang
         - prijs: Double
     }
     class Dosering <<Value Object>> {
         - hoeveelheid : Integer
     }
-    enum Categorie <<Enum>> {
+    enum Gang <<Enum>> {
             VOORGERECHT
             HOOFDGERECHT
             DESSERT
