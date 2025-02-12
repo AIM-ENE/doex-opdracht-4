@@ -493,6 +493,15 @@
             "type": "number",
             "format": "double"
           },
+          "gang": {
+            "type": "string",
+            "enum": [
+              "VOORGERECHT",
+              "HOOFDGERECHT",
+              "DESSERT",
+              "BIJGERECHT"
+            ]
+          },
           "ingredienten": {
             "type": "array",
             "items": {
