@@ -7,13 +7,13 @@ rectangle "Restaurant Aggregate\n" {
         - id : Integer
 
         + maakWinkelmand() : Winkelmand
-        + getWinkelmand(id : Integer) : winkelmand
+        + getWinkelmand(id : Integer) : Optional<Winkelmand>
         + verwijderWinkelmand(winkelmand : Winkelmand)
     }
     class Winkelmand <<Entity>> {
         - id : Integer
 
-        +voegGerechtToe(gerecht : Gerecht)
+        +voegGerechtToe(gerecht : Gerecht) : void
     }
     class WinkelmandRegel <<Value Object>> {
         - volgnummer : Integer
