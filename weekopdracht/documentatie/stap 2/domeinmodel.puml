@@ -47,7 +47,6 @@ rectangle "Tafel Aggregate\n" {
         - bestelStatus : BestellingStatus
 
         + getRekening() : double
-        + markeerBetaald() : double
     }
     enum BestelStatus <<Enum>> {
             OPEN
