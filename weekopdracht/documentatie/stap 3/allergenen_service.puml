@@ -1,0 +1,16 @@
+@startuml
+
+hide circle
+
+class AllergenenService {
+    + getVoedingRestrictie(ingredientNaam:String): Set<VoedingRestrictie>
+}
+
+enum VoedingRestrictie {
+    LACTOSE
+    NOTEN
+    GLUTEN
+    NIKS
+}
+
+@enduml

@@ -25,17 +25,12 @@ else else
     Gast <-- Systeem: menu
 end
 
-opt meer details van een gerecht
-    Gast -> Systeem:getGerechtVanMenu((restaurantId, gerechtNaam)
-    Gast <-- Systeem: gerecht
-end
-
 loop zolang meer bestelling wil plaatsen
     Gast -> Systeem:getNieuweWinkelmand(restaurantId)
     Gast <-- Systeem: winkelmandId
 
     loop voor elk gewenst gerecht
-        Gast -> Systeem:voegGerechtToeAanWinkelmand(restaurantId,winkelmandId,gerechtNaam)
+        Gast -> Systeem:voegGerechtenToeAanWinkelmand(restaurantId,winkelmandId,gerechten)
     end
 
     opt controleren winkelmand
@@ -43,21 +38,21 @@ loop zolang meer bestelling wil plaatsen
         Gast <-- Systeem: winkelmand
     end
 
-    Gast -> Systeem:plaatsBestelling(restaurantId, tafelId, winkelmandId)
+    Gast -> Systeem:plaatsBestelling(restaurantId, tafelnummer, winkelmandId)
     Gast <-- Systeem: bestelNummer
 
     opt controleren bestelling
-        Gast -> Systeem:getBestelling(restaurantId, tafelId, bestelNummer)
+        Gast -> Systeem:getBestelling(restaurantId, tafelnummer, bestelNummer)
         Gast <-- Systeem: bestelling
     end
 
     opt opvragen rekening
-        Gast -> Systeem:getRekening(tafelId)
+        Gast -> Systeem:getRekening(restaurantId, tafelnummer)
         Gast <-- Systeem: rekeningInValuta
     end
 end
 
-Gast -> Systeem:betaalRekening(tafelId, contantBedrag)
+Gast -> Systeem:betaalRekening(restaurantId, tafelnummer, contantBedrag)
 Gast <-- Systeem: wisselGeld (of hoogte van resterende bedrag)
 
 @enduml

@@ -1,0 +1,114 @@
+@startuml
+
+hide circle
+
+rectangle "Restaurant Aggregate\n" {
+    class Restaurant <<Aggregate Root>> {
+        - id : Integer
+
+        + maakWinkelmand() : Winkelmand
+        + getWinkelmand(id : Integer) : winkelmand
+        + verwijderWinkelmand(winkelmand : Winkelmand)
+    }
+    class Winkelmand <<Entity>> {
+        - id : Integer
+
+        +voegGerechtToe(gerecht : Gerecht)
+    }
+    class WinkelmandRegel <<Value Object>> {
+        - volgnummer : Integer
+    }
+    class Voorraad <<Value Object>> {
+        - hoeveelheid : Integer
+    }
+    note left of WinkelmandRegel
+            hetzelfde gerecht kan in één winkelmand
+            meerdere keren voorkomen, vandaar een uniek volgnummer
+            in het `Value Object`.
+    end note
+    note left of Voorraad
+        niet in scope voor de week casus
+    end note
+}
+
+rectangle "Tafel Aggregate\n" {
+    class Tafel <<Aggregate Root>> {
+        - id : Integer
+        - tafelNummer : Integer
+        - rekening : Double
+
+        + getRekening() : double
+        + getBestelling(bestelnummer : int) : Optional<Bestelling>
+        + plaatsBestelling(gerechten : List<Gerechten)
+        + betaalRekening(bedrag : double)
+    }
+    class Bestelling <<Entity>> {
+        - bestelnummer : Integer
+        - bestelStatus : BestellingStatus
+
+        + getRekening() : double
+        + markeerBetaald() : double
+    }
+    enum BestelStatus <<Enum>> {
+            OPEN
+            BEZORGD
+    }
+    class BestelRegel <<Value Object>> {
+        - aantal : Integer
+        - prijs: Double
+    }
+
+
+    note left of BestelRegel::prijs
+        de prijs moet vastgezet worden
+        op moment van bestelling voor dit gerecht
+    end note
+}
+
+rectangle "Gerecht Aggregate\n" {
+    class Gerecht <<Aggregate Root>> {
+        - id : Integer
+        - naam: String
+        - categorie: Categorie
+        - prijs: Double
+    }
+    class Dosering <<Value Object>> {
+        - hoeveelheid : Integer
+    }
+    enum Categorie <<Enum>> {
+            VOORGERECHT
+            HOOFDGERECHT
+            DESSERT
+            BIJGERECHT
+    }
+}
+note right of Gerecht
+        dranken zijn buiten scope van de week casus,
+        maar zouden een eigen aggregate moeten krijgen
+end note
+
+rectangle "Ingredient Aggregate\n" {
+    class Ingredient <<Aggregate Root>> {
+        - id : Integer
+        - naam : String
+    }
+}
+
+Restaurant "1" -r-> "1..*" Tafel            : heeft beschikbaar
+Restaurant "*" --> "0..*" Winkelmand        : heeft actief
+Restaurant "*" --> "0..*" Voorraad          : heeft op
+Restaurant "*" --> "0..*" Gerecht           : heeft op het menu
+
+Winkelmand "*" --> "0..*" WinkelmandRegel   : bestaat uit
+WinkelmandRegel "*" --> "1" Gerecht         : van
+
+Tafel "1" --> "0..*" Bestelling             : heeft onbetaalde
+Bestelling "*" --> "1..*" BestelRegel       : bestaat uit
+BestelRegel "*" ---> "1" Gerecht            : van
+
+Gerecht "1" --> "0..*" Dosering             : bestaat uit
+Dosering "1" --> "0..*" Ingredient          : van
+
+Voorraad "*" --> "0..*" Ingredient          : van
+
+@enduml
