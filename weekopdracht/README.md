@@ -22,7 +22,7 @@ Echter zijn er nog een aantal gaten door jullie in te vullen, te vinden als je z
 Hierbij is het de bedoeling dat jullie de relatie kunnen leggen tussen de domeinlaag en API gebruikmakend van `hexagonal architecture` 
 en op basis daarvan een keuze maken of dit opgelost dient te worden in de `Controller` een `Service` of in een `Repository` met een `Custom Query`.
 
-Hiervoor moeten jullie eerst (na les 3) in de architectuur kunnen aangeven welk object in welke laag thuishoort.
+Hiervoor moet je (na les 3) in de architectuur kunnen aangeven welk object in welke laag thuishoort.
 Dit kan in drawio in [jouw uitwerking](jouw_uitwerking.drawio), maar wellicht is het sneller/efficiënter om dit gewoon op papier te doen.
 
 Neem jouw architectuur plaatje en jouw invulling van de placeholders in de `RestaurantController` mee naar les 4.
