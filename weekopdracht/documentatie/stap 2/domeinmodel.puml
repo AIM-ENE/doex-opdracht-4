@@ -46,10 +46,12 @@ rectangle "Tafel Aggregate\n" {
         - bestelnummer : Integer
         - bestelStatus : BestellingStatus
 
-        + getRekening() : double
+        + getSubTotaal() : double
     }
     enum BestelStatus <<Enum>> {
             OPEN
+            BEREIDEN
+            SERVEREN
             BEZORGD
     }
     class BestelRegel <<Value Object>> {

@@ -14,7 +14,7 @@ Hier zijn keuzes te maken of dat altijd zinnig is, in dit geval heeft het team d
 
 ## operatie contract - bestelling plaatsen
 
-Operatie: plaatsenBestelling(restaurant, tafelnummer, winkelmand)
+Operatie: plaatsBestelling(restaurant, tafelnummer, winkelmand)
 
 Korte beschrijving:
 
@@ -23,13 +23,15 @@ Een nieuwe bestelling wordt ingevoerd in het systeem door een winkelmand om te z
 Precondities:
 
 * Er bestaat een `tafel` T met opgegeven `tafelnummer`.
-* De `winkelmand` bevat minstens één `regel`.
+* De `winkelmand` W bevat minstens één `regel`.
 * Er bestaan gerechten die overeenkomen met de opgegeven `gerecht`:`id`.
 
 Postcondities:
 
 * Er is een `bestelling` B aangemaakt
-* Voor elk gerecht uit de `winkelmand` is een `regel` met uniek `volgnummer` binnen de `bestelling` toegevoegd aan de `bestelling`
+* Voor elk uniek gerecht uit de `winkelmand` is een `regel` R binnen de `bestelling` B aangemaakt met het aantal keer dat deze voorkomt in de `winkelmand` W
+* voor elke `regel` R is er een associatie met de `bestelling` B
 * De `bestelling` heeft een associatie met `tafel` T
+* De `winkelmand` W is verwijderd
 
 ## etc.

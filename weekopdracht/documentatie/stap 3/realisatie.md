@@ -11,3 +11,7 @@ Hierbij is met name gekeken naar het high-level sequence diagram uit de ontwerp 
 
 
 Daarnaast is er een goede externe API gevonden voor het ophalen van de allergenen, de interface is hier te vinden: [allergenen service](allergenen_service.puml).
+
+## implementatie
+
+Voor gebruik is het handig om de `weekopdracht` map als maven project te openen.

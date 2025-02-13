@@ -6,16 +6,24 @@ De weekopdracht draait rondom een Restaurant casus beschreven in [Restaurant cas
 
 De opdracht is om de endpoints aan te vullen voor een nog later te bouwen front-end (buiten scope van deze weekopdracht).
 
-De repository bevat al starter code, implementatie van de domeinlaag en gedeeltelijk ook services, custom queries en controller implementatie.
+De repository bevat al de implementatie van de domeinlaag en gedeeltelijk ook services, custom queries en controller implementatie.
 
-Echter zijn er nog een aantal gaten door jullie in te vullen:
+Echter zijn er nog een aantal gaten door jullie in te vullen, te vinden als je zoekt in de weekopdracht map op `PLACEHOLDER`:
 
-- TODO...
+- In de `RestaurantController` moet nog de systeemoperatie [plaatsBestelling(restaurant, tafelnummer, winkelmand)](documentatie/stap%202/ontwerp.md) uitgewerkt worden
+  - geef hiervoor aan invulling deze methode in de controller: 
+  `plaatsBestelling(@PathVariable("restaurantId") int restaurantId,
+    @RequestBody TafelBestelling tafelBestelling)`
+- In de `RestaurantController` moet nog de functie om de juiste tafel te vinden op basis van restaurantId en tafelnummer
+  - de tafel is uniek vanwege een Id, maar er mag ook maar 1 combinatie van restaurant en tafelnummer bestaan 
+  - zie ook constraint op de `Tafel` tabel in het [schema](src/main/resources/schema.sql)
+- In de `RestaurantController` moet nog de filtering gedaan worden van de menukaart rekeninghoudend met `VoedingRestrictie` 
 
-Hierbij is het de bedoeling dat jullie de relatie kunnen leggen tussen de domeinlaag en API gebruikmakend van `hexagonal architecture`.
+Hierbij is het de bedoeling dat jullie de relatie kunnen leggen tussen de domeinlaag en API gebruikmakend van `hexagonal architecture` 
+en op basis daarvan een keuze maken of dit opgelost dient te worden in de `Controller` een `Service` of in de `Repository` met een `Custom Query`.
 
 Hiervoor moeten jullie (na les 3) in de architectuur kunnen aangeven welk object in welke laag thuishoort in [jouw uitwerking](jouw_uitwerking.drawio).
-Neem dit mee naar les 4.
+Neem dit ook mee naar les 4, evenals jouw invulling van de placeholders in de `RestaurantController`.
 
 ## Les voorbereidingen
 

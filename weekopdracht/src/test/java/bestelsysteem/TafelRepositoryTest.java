@@ -1,7 +1,7 @@
 package bestelsysteem.domein;
 
 import bestelsysteem.model.Bestelling;
-import bestelsysteem.model.BestellingStatus;
+import bestelsysteem.model.BestelStatus;
 import bestelsysteem.model.Gerecht;
 import bestelsysteem.model.Tafel;
 import bestelsysteem.repository.GerechtRepository;
@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,22 +35,24 @@ public class TafelRepositoryTest {
     @Test
     public void testMaakBestelling() {
         //ARRANGE
-        Optional<Gerecht> gerecht = gerechtRepository.findByNaam("rib-eye");
-        Assertions.assertTrue(gerecht.isPresent());
+        Gerecht gerecht = gerechtRepository.findByNaam("rib-eye").orElse(null);
+        Assertions.assertNotNull(gerecht);
         Optional<Tafel> tafelOptional = tafelRepository.findById(1);
         Assertions.assertTrue(tafelOptional.isPresent());
-        List<Gerecht> bestelling = gerecht.stream().toList();
+        List<Gerecht> bestelling = new ArrayList<>();
+        bestelling.add(gerecht);
+        bestelling.add(gerecht);
         Tafel tafel = tafelOptional.get();
 
         //ACT
-        tafel.plaatsBestelling(bestelling);
+        int bestelnummer = tafel.plaatsBestelling(bestelling);
         tafel = tafelRepository.save(tafel);
 
         //ASSERT
-        Optional<Bestelling> bestellingOptional = tafel.getLaatsteBestelling();
+        Optional<Bestelling> bestellingOptional = tafel.getBestelling(bestelnummer);
         Assertions.assertTrue(bestellingOptional.isPresent());
         Assertions.assertEquals(bestelling.getFirst().id(),
-                bestellingOptional.get().getGerechten().getFirst().gerecht().getId());
+                bestellingOptional.get().getGerechten().iterator().next().gerecht().getId());
     }
 
     @Test
@@ -89,7 +92,5 @@ public class TafelRepositoryTest {
 
         //ASSERT
         Assertions.assertEquals( 0, tafel.getRekening());
-        Assertions.assertEquals(tafel.getLaatsteBestelling().map(Bestelling::getStatus)
-                .orElse(null), BestellingStatus.PAID);
     }
 }

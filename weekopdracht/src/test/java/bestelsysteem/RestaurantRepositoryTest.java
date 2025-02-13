@@ -1,4 +1,4 @@
-package bestelsysteem;
+package bestelsysteem.domein;
 
 import bestelsysteem.model.*;
 import bestelsysteem.repository.GerechtRepository;
@@ -38,8 +38,7 @@ public class RestaurantRepositoryTest {
         restaurant = restaurantRepository.save(restaurant);
 
         //ASSERT
-        Optional<Winkelmand> winkelmandOptional = restaurant.getWinkelmandOnDate(winkelmand.datumTijd());
-        Assertions.assertTrue(winkelmandOptional.isPresent());
+        Assertions.assertEquals(winkelmand, restaurant.getWinkelmand(winkelmand.id()).orElse(null));
     }
 
     @Test
@@ -48,6 +47,9 @@ public class RestaurantRepositoryTest {
         Optional<Gerecht> gerechtOptional = gerechtRepository.findByNaam("rib-eye");
         Assertions.assertTrue(gerechtOptional.isPresent());
         Gerecht gerecht = gerechtOptional.get();
+        Optional<Gerecht> gerechtOptional2 = gerechtRepository.findByNaam("zalm");
+        Assertions.assertTrue(gerechtOptional2.isPresent());
+        Gerecht gerecht2 = gerechtOptional2.get();
         Optional<Restaurant> restaurantOptional = restaurantRepository.findById(1);
         Assertions.assertTrue(restaurantOptional.isPresent());
         Restaurant restaurant = restaurantOptional.get();
@@ -58,8 +60,8 @@ public class RestaurantRepositoryTest {
         restaurant = restaurantRepository.save(restaurant);
 
         //ASSERT
-        Optional<Winkelmand> winkelmandOptional = restaurant.getWinkelmandOnDate(winkelmand.datumTijd());
-        Assertions.assertTrue(winkelmandOptional.isPresent());
+        Optional<Winkelmand> winkelmandOptional = restaurant.getWinkelmand(winkelmand.id());
+        Assertions.assertEquals(winkelmand, winkelmandOptional.orElse(null));
         Assertions.assertEquals(gerecht.id(),
                 winkelmandOptional.get().gerechten().getFirst().gerecht().getId());
     }
@@ -72,7 +74,7 @@ public class RestaurantRepositoryTest {
         Restaurant restaurant = restaurantOptional.get();
         Winkelmand winkelmand = restaurant.maakWinkelmand();
         restaurant = restaurantRepository.save(restaurant);
-        Optional<Winkelmand> winkelmandOptional = restaurant.getWinkelmandOnDate(winkelmand.datumTijd());
+        Optional<Winkelmand> winkelmandOptional = restaurant.getWinkelmand(winkelmand.id());
         Assertions.assertTrue(winkelmandOptional.isPresent());
 
         //ACT

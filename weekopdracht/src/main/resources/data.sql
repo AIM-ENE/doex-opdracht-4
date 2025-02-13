@@ -2,9 +2,9 @@
 INSERT INTO Restaurant(versie) VALUES (1);
 
 -- Inserting data into Gerecht table
-INSERT INTO Gerecht (restaurant, naam, prijs) VALUES (1, 'Spaghetti_Bolognese', 9.99);
-INSERT INTO Gerecht (restaurant, naam, prijs) VALUES (1, 'Caesar_Salad', 8.49);
-INSERT INTO Gerecht (restaurant, naam, prijs) VALUES (1, 'Margherita_Pizza', 10.99);
+INSERT INTO Gerecht (restaurant, naam, prijs, gang) VALUES (1, 'Spaghetti_Bolognese', 9.99, 'HOOFDGERECHT');
+INSERT INTO Gerecht (restaurant, naam, prijs, gang) VALUES (1, 'Caesar_Salad', 8.49, 'HOOFDGERECHT');
+INSERT INTO Gerecht (restaurant, naam, prijs, gang) VALUES (1, 'Margherita_Pizza', 10.99, 'HOOFDGERECHT');
 
 -- Inserting data into Ingredient table
 INSERT INTO Ingredient (naam) VALUES ('Spaghetti');
