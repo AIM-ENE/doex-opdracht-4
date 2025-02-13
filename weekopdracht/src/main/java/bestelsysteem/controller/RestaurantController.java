@@ -51,10 +51,9 @@ public class RestaurantController {
     @GetMapping("/restaurant/{restaurantId}/menu/filter")
     public Menu getMenuGefilterdOp(@PathVariable("restaurantId") int restaurantId,
                                    @RequestParam("condities") Set<VoedingRestrictie> condities) {
-        return new Menu(getMenu(restaurantId).gerechten().stream().filter(gerecht -> {
-            /* PLACEHOLDER: implementeer hier het filteren van de gerechten op basis van `allergenenService` */
-            return false;
-        }).collect(Collectors.toList()));
+        Menu menu = getMenu(restaurantId);
+        /* PLACEHOLDER: implementeer het filteren van de gerechten in het menu op basis van `allergenenService` */
+        return menu;
     }
 
     @PutMapping("/restaurant/{restaurantId}/winkelmand")
@@ -83,7 +82,7 @@ public class RestaurantController {
     @PostMapping("/restaurant/{restaurantId}/bestelling")
     public Integer plaatsBestelling(@PathVariable("restaurantId") int restaurantId,
                                     @RequestBody TafelBestelling tafelBestelling) {
-        /* PLACEHOLDER: implementeer hier de operatie plaatsBestelling */
+        /* PLACEHOLDER: implementeer de operatie plaatsBestelling */
         return -1;
     }
 
@@ -114,7 +113,7 @@ public class RestaurantController {
     }
 
     private Optional<Tafel> findTafelByRestaurant(int restaurantId, int tafelNummer) {
-        /* PLACEHOLDER: implementeer hier het vinden van de juiste Tafel */
+        /* PLACEHOLDER: implementeer het vinden van de juiste Tafel */
         return Optional.empty();
     }
 
