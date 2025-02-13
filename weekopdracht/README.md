@@ -11,7 +11,7 @@ De repository bevat al de implementatie van de domeinlaag en gedeeltelijk ook se
 Echter zijn er nog een aantal gaten door jullie in te vullen, te vinden als je zoekt in de weekopdracht map op `PLACEHOLDER`:
 
 - In de `RestaurantController` moet nog de systeemoperatie [plaatsBestelling(restaurant, tafelnummer, winkelmand)](documentatie/stap%202/ontwerp.md) uitgewerkt worden
-  - geef hiervoor aan invulling deze methode in de controller: 
+  - geef hiervoor invulling aan deze methode in de controller: 
   `plaatsBestelling(@PathVariable("restaurantId") int restaurantId,
     @RequestBody TafelBestelling tafelBestelling)`
 - In de `RestaurantController` moet nog de functie om de juiste tafel te vinden op basis van restaurantId en tafelnummer
