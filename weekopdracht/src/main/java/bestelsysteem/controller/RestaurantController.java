@@ -9,16 +9,12 @@ import bestelsysteem.service.AllergenenService;
 import bestelsysteem.service.AllergenenServiceImpl;
 import bestelsysteem.service.RestaurantService;
 import bestelsysteem.service.TafelService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -57,7 +53,7 @@ public class RestaurantController {
                                    @RequestParam("condities") Set<VoedingRestrictie> condities) {
         return new Menu(getMenu(restaurantId).gerechten().stream().filter(gerecht -> {
             /* PLACEHOLDER: implementeer hier het filteren van de gerechten op basis van `allergenenService` */
-            return false
+            return false;
         }).collect(Collectors.toList()));
     }
 
@@ -117,8 +113,9 @@ public class RestaurantController {
         }).orElse(0.0);
     }
 
-    private Tafel findTafelByRestaurant(int restaurantId, int tafelNummer) {
+    private Optional<Tafel> findTafelByRestaurant(int restaurantId, int tafelNummer) {
         /* PLACEHOLDER: implementeer hier het vinden van de juiste Tafel */
+        return Optional.empty();
     }
 
     //TODO: zou dit naar een service moeten, bijvoorbeeld restaurantService?
