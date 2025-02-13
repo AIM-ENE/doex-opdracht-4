@@ -2,11 +2,11 @@
 
 ## Weekopdracht
 
-De weekopdracht draait rondom een Restaurant casus beschreven in [Restaurant casus](documentatie/restaurant-casus.md).
+De weekopdracht draait rondom een Restaurant casus beschreven in [Restaurant casus](documentatie/restaurant-casus.md), lees de beschrijving en scenario's goed door voor les 1.
 
-De opdracht is om de endpoints aan te vullen voor een nog later te bouwen front-end (buiten scope van deze weekopdracht).
+De opdracht is om de endpoints aan te vullen voor een nog later te bouwen front-end (front-end is buiten scope van deze weekopdracht).
 
-De repository bevat al de implementatie van de domeinlaag en gedeeltelijk ook services, custom queries en controller implementatie.
+De repository bevat al de implementatie van de domeinlaag en gedeeltelijk ook services, custom queries en controller.
 
 Echter zijn er nog een aantal gaten door jullie in te vullen, te vinden als je zoekt in de weekopdracht map op `PLACEHOLDER`:
 
@@ -14,16 +14,18 @@ Echter zijn er nog een aantal gaten door jullie in te vullen, te vinden als je z
   - geef hiervoor invulling aan deze methode in de controller: 
   `plaatsBestelling(@PathVariable("restaurantId") int restaurantId,
     @RequestBody TafelBestelling tafelBestelling)`
-- In de `RestaurantController` moet nog de functie om de juiste tafel te vinden op basis van restaurantId en tafelnummer
-  - de tafel is uniek vanwege een Id, maar er mag ook maar 1 combinatie van restaurant en tafelnummer bestaan 
+- In de `RestaurantController` moet nog de functie om de juiste tafel te vinden op basis van restaurantId en tafelnummer geïmplementeerd worden
+  - de tafel heeft als primary key een Id, maar er mag ook maar 1 combinatie van restaurant en tafelnummer bestaan 
   - zie ook constraint op de `Tafel` tabel in het [schema](src/main/resources/schema.sql)
 - In de `RestaurantController` moet nog de filtering gedaan worden van de menukaart rekeninghoudend met `VoedingRestrictie` 
 
 Hierbij is het de bedoeling dat jullie de relatie kunnen leggen tussen de domeinlaag en API gebruikmakend van `hexagonal architecture` 
-en op basis daarvan een keuze maken of dit opgelost dient te worden in de `Controller` een `Service` of in de `Repository` met een `Custom Query`.
+en op basis daarvan een keuze maken of dit opgelost dient te worden in de `Controller` een `Service` of in een `Repository` met een `Custom Query`.
 
-Hiervoor moeten jullie (na les 3) in de architectuur kunnen aangeven welk object in welke laag thuishoort in [jouw uitwerking](jouw_uitwerking.drawio).
-Neem dit ook mee naar les 4, evenals jouw invulling van de placeholders in de `RestaurantController`.
+Hiervoor moeten jullie eerst (na les 3) in de architectuur kunnen aangeven welk object in welke laag thuishoort.
+Dit kan in drawio in [jouw uitwerking](jouw_uitwerking.drawio), maar wellicht is het sneller/efficiënter om dit gewoon op papier te doen.
+
+Neem jouw architectuur plaatje en jouw invulling van de placeholders in de `RestaurantController` mee naar les 4.
 
 ## Les voorbereidingen
 
