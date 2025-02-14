@@ -8,6 +8,8 @@ De opdracht is om de endpoints aan te vullen voor een nog later te bouwen front-
 
 De repository bevat al de implementatie van de domeinlaag en gedeeltelijk ook services, custom queries en controller.
 
+Het is mogelijk om de applicatie op te starten middels `Application` om vervolgens te testen met de **HTTP Client van Intellij**, gebruik bijvoorbeeld [deze requests](request.http).
+
 Echter zijn er nog een aantal gaten door jullie in te vullen, te vinden als je zoekt in de weekopdracht map op `PLACEHOLDER`:
 
 - In de `RestaurantController` moet je nog de systeemoperatie [plaatsBestelling(restaurant, tafelnummer, winkelmand)](documentatie/stap%202/ontwerp.md) uitwerken

@@ -1,0 +1,53 @@
+// ophalen menu
+
+localhost:8080/restaurant/1/menu
+
+###
+
+// aanmaken winkelmand
+
+PUT localhost:8080/restaurant/1/winkelmand
+
+###
+
+// toevoegen winkelmand
+POST localhost:8080/restaurant/1/winkelmand/1 HTTP/1.1
+Content-Type: application/json
+
+["Spaghetti_Bolognese"]
+
+###
+
+// ophalen winkelmand
+
+GET localhost:8080/restaurant/1/winkelmand/1
+
+###
+
+// plaatsen bestelling tafel
+POST localhost:8080/restaurant/1/bestelling HTTP/1.1
+Content-Type: application/json
+
+{"winkelmand": 1, "tafel": 1}
+
+###
+
+// ophalen bestelling tafel
+GET localhost:8080/restaurant/1/tafel/1/bestelling/1
+
+###
+
+// ophalen rekening tafel
+GET localhost:8080/restaurant/1/tafel/1/rekening
+
+###
+
+// ophalen rekening tafel
+POST localhost:8080/restaurant/1/tafel/1/rekening HTTP/1.1
+Content-Type: application/json
+
+{"bedrag": 10 }
+
+###
+
+// etc.
