@@ -12,13 +12,13 @@ Het is mogelijk om de applicatie op te starten middels `Application` om vervolge
 
 Echter zijn er nog een aantal gaten door jullie in te vullen, te vinden als je zoekt in de weekopdracht map op `PLACEHOLDER`:
 
+- In de `RestaurantController` moet je de functie om de juiste tafel te vinden op basis van restaurantId en tafelnummer implementeren
+  - de tafel heeft als primary key een Id, maar er mag ook maar 1 combinatie van restaurant en tafelnummer bestaan
+  - zie ook constraint op de `Tafel` tabel in het [schema](src/main/resources/schema.sql)
 - In de `RestaurantController` moet je nog de systeemoperatie [plaatsBestelling(restaurant, tafelnummer, winkelmand)](documentatie/stap%202/ontwerp.md) uitwerken
   - geef hiervoor invulling aan deze methode in de controller: 
   `plaatsBestelling(@PathVariable("restaurantId") int restaurantId,
     @RequestBody TafelBestelling tafelBestelling)`
-- In de `RestaurantController` moet je de functie om de juiste tafel te vinden op basis van restaurantId en tafelnummer implementeren
-  - de tafel heeft als primary key een Id, maar er mag ook maar 1 combinatie van restaurant en tafelnummer bestaan 
-  - zie ook constraint op de `Tafel` tabel in het [schema](src/main/resources/schema.sql)
 - In de `RestaurantController` moet je nog de filtering doen van de menukaart rekeninghoudend met `VoedingRestrictie` 
 
 Hierbij is het de bedoeling dat jullie de relatie kunnen leggen tussen de domeinlaag en API gebruikmakend van `hexagonal architecture` en op basis daarvan een keuze maken dit op te lossen in de `Controller`, in een `Service` of in een `Repository` met een `Custom Query`.
