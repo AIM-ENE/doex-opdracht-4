@@ -18,7 +18,7 @@ Echter zijn er nog een aantal gaten door jullie in te vullen, te vinden als je z
   `plaatsBestelling(@PathVariable("restaurantId") int restaurantId,
     @RequestBody TafelBestelling tafelBestelling)`
 3. In de `RestaurantController` moet je nog de filtering doen van de menukaart rekeninghoudend met `VoedingRestrictie` 
-  - maak hiervoor gebruik van de dummy implementatie van de `AllergenenService(Impl)`
+  - maak hiervoor gebruik van de dummy implementatie van de `AllergenenService`
 
 Hierbij is het de bedoeling dat jullie de relatie kunnen leggen tussen de domeinlaag en API gebruikmakend van `hexagonal architecture` en op basis daarvan een keuze maken dit op te lossen in de `Controller`, in een `Service` of in een `Repository` met een `Custom Query`.
 
