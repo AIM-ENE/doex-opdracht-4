@@ -5,7 +5,7 @@
 Bij het scenario: `Als een gast wil ik eten kunnen bestellen zodat ik het gerecht naar wens krijg opgediend`
 is in een domain storytelling sessie een fine-grained domain story opgesteld.
 
-[fine-grained domain story - bestelling plaatsen](bestelling%20plaatsen%20digitalized%20to-be%20fine-grained.egn.svg)
+[![fine-grained domain story - bestelling plaatsen](bestelling%20plaatsen%20digitalized%20to-be%20fine-grained.egn.svg)](bestelling%20plaatsen%20digitalized%20to-be%20fine-grained.egn.svg)
 
 we kunnen op basis hiervan user stories opstellen bij de verschillende activiteiten:
 1. Als gast wil ik inloggen met mijn tafelnummer zodat mijn bestellingen op de juiste plek terecht zullen komen
@@ -32,7 +32,7 @@ we kunnen op basis hiervan user stories opstellen bij de verschillende activitei
 Bij het scenario: `Als gast wil ik de rekening contant betalen zodat ik kan vertrekken zonder openstaande schuld`
 is in een domain storytelling sessie een fine-grained domain story opgesteld.
 
-[fine-grained domain story - rekening contant betalen](bestelling%20plaatsen%20digitalized%20to-be%20fine-grained.egn.svg)
+![fine-grained domain story - rekening contant betalen](bestelling%20plaatsen%20digitalized%20to-be%20fine-grained.egn.svg)
 
 1. Als gast wil ik inloggen met mijn tafelnummer zodat ik de juiste rekening kan gaan betalen
 2. Als gast wil ik de rekening kunnen bekijken zodat ik weet hoeveel geld ik tot nu toe kwijt ben
