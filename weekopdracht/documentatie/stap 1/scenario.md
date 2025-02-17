@@ -5,7 +5,7 @@
 Bij het scenario: `Als een gast wil ik eten kunnen bestellen zodat ik het gerecht naar wens krijg opgediend`
 is in een domain storytelling sessie een fine-grained domain story opgesteld.
 
-[![fine-grained domain story - bestelling plaatsen](bestelling%20plaatsen%20digitalized%20to-be%20fine-grained.egn.svg)](bestelling%20plaatsen%20digitalized%20to-be%20fine-grained.egn.svg)
+![fine-grained domain story - bestelling plaatsen](bestelling%20plaatsen%20digitalized%20to-be%20fine-grained.egn.svg)
 
 we kunnen op basis hiervan user stories opstellen bij de verschillende activiteiten:
 1. Als gast wil ik inloggen met mijn tafelnummer zodat mijn bestellingen op de juiste plek terecht zullen komen
