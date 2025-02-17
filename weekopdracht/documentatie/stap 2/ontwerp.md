@@ -9,24 +9,23 @@ maar nog niet in-scope van de eerste iteratie.
 
 Vervolgens heeft het team een high-level sequence diagram opgesteld van een [restaurant bezoek](SSD%20-%20restaurant%20bezoek.puml).
 
-Voor elk van de operaties op het systeem had een operatie contract opgesteld kunnen worden zoals onderstaand voor het `bestelling plaatsen`.
-Hier zijn keuzes te maken of dat altijd zinnig is, in dit geval heeft het team de keuze gemaakt om niet meer operatie contracten op te stellen voor de eerste iteratie.
+Vervolgens kan voor elke methode bepaald worden wat de pre- en postcondities zijn.
+Zoals hieronder vast weergegeven voor de methode `Bestelling plaatsen`.
 
-## operatie contract - bestelling plaatsen
+## bestelling plaatsen
 
-Operatie: plaatsBestelling(restaurant, tafelnummer, winkelmand)
+Methode: `plaatsBestelling(restaurant, tafelnummer, winkelmand)`
 
 Korte beschrijving:
+`Een nieuwe bestelling wordt ingevoerd in het systeem door een winkelmand om te zetten naar een bestelling.`
 
-Een nieuwe bestelling wordt ingevoerd in het systeem door een winkelmand om te zetten naar een bestelling
-
-Precondities:
+### Precondities
 
 * Er bestaat een `tafel` T met opgegeven `tafelnummer`.
 * De `winkelmand` W bevat minstens één `regel`.
 * Er bestaan gerechten die overeenkomen met de opgegeven `gerecht`:`id`.
 
-Postcondities:
+### Postcondities
 
 * Er is een `bestelling` B aangemaakt
 * Voor elk uniek gerecht uit de `winkelmand` is een `regel` R binnen de `bestelling` B aangemaakt met het aantal keer dat deze voorkomt in de `winkelmand` W

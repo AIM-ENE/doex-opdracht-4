@@ -13,7 +13,7 @@ Echter zijn er nog een aantal gaten door jullie in te vullen, te vinden als je z
 1. In de `RestaurantController` moet je de functie om de juiste tafel te vinden op basis van restaurantId en tafelnummer implementeren
   - de tafel heeft als primary key een Id, maar er mag ook maar 1 combinatie van restaurant en tafelnummer bestaan
   - zie ook constraint op de `Tafel` tabel in het [schema](src/main/resources/schema.sql)
-2. In de `RestaurantController` moet je nog de systeemoperatie [plaatsBestelling(restaurant, tafelnummer, winkelmand)](documentatie/stap%202/ontwerp.md) uitwerken
+2. In de `RestaurantController` moet je nog de methode [plaatsBestelling(restaurant, tafelnummer, winkelmand)](documentatie/stap%202/ontwerp.md) uitwerken
   - geef hiervoor invulling aan deze methode in de controller: 
   `plaatsBestelling(@PathVariable("restaurantId") int restaurantId,
     @RequestBody TafelBestelling tafelBestelling)`
