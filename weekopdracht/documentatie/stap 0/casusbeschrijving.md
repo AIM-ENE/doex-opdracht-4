@@ -54,7 +54,7 @@ Nadat Anna van haar maaltijd heeft genoten betaalt ze de rekening bij Peter.
 Ze bedankt het personeel voor de uitstekende service en verlaat het restaurant met een voldaan gevoel,
 klaar om haar avond voort te zetten.
 
-[Restaurant bezoek as-is Coarse-Grained](Restaurant%20bezoek%20pure%20as-is%20coarse-grained.egn.svg)
+[![Restaurant bezoek as-is Coarse-Grained](Restaurant%20bezoek%20pure%20as-is%20coarse-grained.egn.svg)]((Restaurant%20bezoek%20pure%20as-is%20coarse-grained.egn.svg))
 
 ## Gewenste verbeteringen aan dit proces (to-be)
 
@@ -74,4 +74,4 @@ Zodra een bestelling is opgegeven komt deze in het keukenmanagement systeem tere
 Een bijkomstigheid is dat de lopende rekening te allen tijde inzichtelijk is voor de klant en de wens is dat deze ook direct te betalen is bij een geldautomaat naast de ingang.
 In de toekomst wil Jan ook met zijn tijd meegaan en digitale betaalmiddelen ondersteunen, maar hij vindt de bijkomende transactiekosten te hoog om nu te realiseren.
 
-[Restaurant bezoek na reservering digitalized to-be coarse-grained](Restaurant%20bezoek%20zonder%20reservering%20digitalized%20to-be%20coarse-grained.egn.svg)
+[![Restaurant bezoek na reservering digitalized to-be coarse-grained](Restaurant%20bezoek%20zonder%20reservering%20digitalized%20to-be%20coarse-grained.egn.svg)](Restaurant%20bezoek%20zonder%20reservering%20digitalized%20to-be%20coarse-grained.egn.svg)
