@@ -32,7 +32,7 @@ we kunnen op basis hiervan user stories opstellen bij de verschillende activitei
 Bij het scenario: `Als gast wil ik de rekening contant betalen zodat ik kan vertrekken zonder openstaande schuld`
 is in een domain storytelling sessie een fine-grained domain story opgesteld.
 
-![fine-grained domain story - rekening contant betalen](bestelling%20plaatsen%20digitalized%20to-be%20fine-grained.egn.svg)
+![fine-grained domain story - rekening contant betalen](rekening%20betalen%20met%20contant%20geld%20digitalized%20to-be%20fine-grained.egn.svg)
 
 1. Als gast wil ik inloggen met mijn tafelnummer zodat ik de juiste rekening kan gaan betalen
 2. Als gast wil ik de rekening kunnen bekijken zodat ik weet hoeveel geld ik tot nu toe kwijt ben
