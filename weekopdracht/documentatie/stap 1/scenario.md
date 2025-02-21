@@ -19,7 +19,7 @@ we kunnen op basis hiervan user stories opstellen bij de verschillende activitei
 >
 > - Als gast wil ik het formaat van een gerecht kunnen kiezen zodat ik een portie van gewenst formaat krijg
 >
-> - Als gast wil ik een gerecht kunnen verwijderen uit mijn bestelling zodat ik een fout kan corrigeren
+> - Als gast wil ik een gerecht kunnen verwijderen uit mijn winkelwagen zodat ik een fout kan corrigeren
 >
 > - Als gast wil ik kunnen zien wat de verwachte levertijd is van mijn bestelling zodat ik mijn verwachting daarop kan bijstellen
 >
