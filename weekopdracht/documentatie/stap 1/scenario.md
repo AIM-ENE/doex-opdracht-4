@@ -21,6 +21,8 @@ we kunnen op basis hiervan user stories opstellen bij de verschillende activitei
 >
 > - Als gast wil ik een gerecht kunnen verwijderen uit mijn winkelwagen zodat ik een fout kan corrigeren
 >
+> - Als gast wil ik een bestelling kunnen annuleren zodat ik andere gerechten kan bestellen
+> 
 > - Als gast wil ik kunnen zien wat de verwachte levertijd is van mijn bestelling zodat ik mijn verwachting daarop kan bijstellen
 >
 > - Als gast wil ik het maandmenu kunnen bekijken
