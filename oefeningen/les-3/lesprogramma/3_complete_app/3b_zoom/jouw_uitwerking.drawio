@@ -1,6 +1,6 @@
-<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.0.16 Chrome/132.0.6834.196 Electron/34.2.0 Safari/537.36" version="26.0.16">
   <diagram name="Page-1" id="-hfQYTGBIGC2IBwUTKeI">
-    <mxGraphModel dx="872" dy="829" grid="1" gridSize="10" guides="0" tooltips="1" connect="1" arrows="0" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1882" dy="801" grid="1" gridSize="10" guides="0" tooltips="1" connect="1" arrows="0" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" value="Hexagon" style="locked=1;" parent="0" />
@@ -163,7 +163,7 @@
             <mxPoint x="320" y="920" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="afUNWZxvSuAQ3O2gbJk9-2" value="Use" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="afUNWZxvSuAQ3O2gbJk9-1" vertex="1" connectable="0">
+        <mxCell id="afUNWZxvSuAQ3O2gbJk9-2" value="&lt;span style=&quot;font-size: 12px; text-wrap-mode: wrap;&quot;&gt;«use»&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="afUNWZxvSuAQ3O2gbJk9-1" vertex="1" connectable="0">
           <mxGeometry x="-0.025" y="2" relative="1" as="geometry">
             <mxPoint x="1" as="offset" />
           </mxGeometry>
