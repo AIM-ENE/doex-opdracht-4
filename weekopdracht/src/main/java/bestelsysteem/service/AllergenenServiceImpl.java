@@ -1,10 +1,12 @@
 package bestelsysteem.service;
 
 import bestelsysteem.dto.VoedingRestrictie;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Service
 public class AllergenenServiceImpl implements AllergenenService {
     @Override
     public Set<VoedingRestrictie> getVoedingRestrictie(String ingredientNaam) {

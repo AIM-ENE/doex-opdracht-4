@@ -33,14 +33,14 @@ public class RestaurantController {
                                 RestaurantRepository restaurantRepository,
                                 TafelService tafelService,
                                 TafelRepository tafelRepository,
-                                GerechtRepository gerechtRepository) {
+                                GerechtRepository gerechtRepository,
+                                AllergenenService allergenenService) {
         this.restaurantService = restaurantService;
         this.restaurantRepository = restaurantRepository;
         this.tafelService = tafelService;
         this.tafelRepository = tafelRepository;
         this.gerechtRepository = gerechtRepository;
-
-        allergenenService = new AllergenenServiceImpl();
+        this.allergenenService = allergenenService;
     }
 
     @GetMapping("restaurant/{restaurantId}/menu")
