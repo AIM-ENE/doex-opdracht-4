@@ -44,10 +44,10 @@ public class RestaurantRepositoryTest {
     @Test
     public void testToevoegenWinkelmand() {
         //ARRANGE
-        Optional<Gerecht> gerechtOptional = gerechtRepository.findByNaam("rib-eye");
+        Optional<Gerecht> gerechtOptional = gerechtRepository.findByNaam("Spaghetti_Bolognese");
         Assertions.assertTrue(gerechtOptional.isPresent());
         Gerecht gerecht = gerechtOptional.get();
-        Optional<Gerecht> gerechtOptional2 = gerechtRepository.findByNaam("zalm");
+        Optional<Gerecht> gerechtOptional2 = gerechtRepository.findByNaam("Caesar_Salad");
         Assertions.assertTrue(gerechtOptional2.isPresent());
         Gerecht gerecht2 = gerechtOptional2.get();
         Optional<Restaurant> restaurantOptional = restaurantRepository.findById(1);

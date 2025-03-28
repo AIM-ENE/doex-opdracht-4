@@ -1,8 +1,12 @@
 package bestelsysteem.service;
 
+import bestelsysteem.model.Restaurant;
+import bestelsysteem.model.Winkelmand;
 import bestelsysteem.repository.GerechtRepository;
 import bestelsysteem.repository.RestaurantRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -17,13 +21,18 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     public void plaatsGerechtInWinkelmand(int restaurantId, int winkelmandId, List<String> gerechtNamen) {
-        restaurantRepository.findById(restaurantId).map(restaurant ->
-                restaurant.getWinkelmand(winkelmandId).map(winkelmand -> {
-                    for(String gerechtNaam : gerechtNamen) {
-                        gerechtRepository.findByNaam(gerechtNaam).ifPresent(winkelmand::voegGerechtToe);
-                    }
-                    return restaurantRepository.save(restaurant);
-                })
-        );
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "restaurant niet gevonden"));
+        Winkelmand winkelmand = restaurant.getWinkelmand(winkelmandId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "winkelmand niet gevonden"));
+
+        for(String gerechtNaam : gerechtNamen) {
+            bestelsysteem.model.Gerecht gerecht = gerechtRepository.findByNaam(gerechtNaam)
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                            String.format("gerecht '%s' niet gevonden", gerechtNaam)));
+
+            winkelmand.voegGerechtToe(gerecht);
+        }
+        restaurantRepository.save(restaurant);
     }
 }

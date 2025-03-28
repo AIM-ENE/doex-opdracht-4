@@ -1,7 +1,6 @@
 package bestelsysteem.domein;
 
 import bestelsysteem.model.Bestelling;
-import bestelsysteem.model.BestelStatus;
 import bestelsysteem.model.Gerecht;
 import bestelsysteem.model.Tafel;
 import bestelsysteem.repository.GerechtRepository;
@@ -35,7 +34,7 @@ public class TafelRepositoryTest {
     @Test
     public void testMaakBestelling() {
         //ARRANGE
-        Gerecht gerecht = gerechtRepository.findByNaam("rib-eye").orElse(null);
+        Gerecht gerecht = gerechtRepository.findByNaam("Spaghetti_Bolognese").orElse(null);
         Assertions.assertNotNull(gerecht);
         Optional<Tafel> tafelOptional = tafelRepository.findById(1);
         Assertions.assertTrue(tafelOptional.isPresent());
@@ -58,7 +57,7 @@ public class TafelRepositoryTest {
     @Test
     public void testGetRekening() {
         //ARRANGE
-        Optional<Gerecht> gerecht = gerechtRepository.findByNaam("rib-eye");
+        Optional<Gerecht> gerecht = gerechtRepository.findByNaam("Spaghetti_Bolognese");
         Assertions.assertTrue(gerecht.isPresent());
         Optional<Tafel> tafelOptional = tafelRepository.findById(1);
         Assertions.assertTrue(tafelOptional.isPresent());
@@ -71,13 +70,14 @@ public class TafelRepositoryTest {
 
         //ASSERT
         double rekening = tafel.getRekening();
-        Assertions.assertEquals(gerecht.get().prijs(), rekening);
+        Assertions.assertNotEquals(gerecht.get().prijs(), rekening); //prijs is 9,99
+        Assertions.assertEquals(Math.round(gerecht.get().prijs()), rekening);
     }
 
     @Test
     public void testBetaalRekening() {
         //ARRANGE
-        Optional<Gerecht> gerecht = gerechtRepository.findByNaam("rib-eye");
+        Optional<Gerecht> gerecht = gerechtRepository.findByNaam("Spaghetti_Bolognese");
         Assertions.assertTrue(gerecht.isPresent());
         Optional<Tafel> tafelOptional = tafelRepository.findById(1);
         Assertions.assertTrue(tafelOptional.isPresent());

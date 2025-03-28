@@ -1,6 +1,7 @@
 package bestelsysteem.controller;
 
 import bestelsysteem.dto.*;
+import bestelsysteem.model.Restaurant;
 import bestelsysteem.model.Tafel;
 import bestelsysteem.repository.GerechtRepository;
 import bestelsysteem.repository.RestaurantRepository;
@@ -9,7 +10,9 @@ import bestelsysteem.service.AllergenenService;
 import bestelsysteem.service.AllergenenServiceImpl;
 import bestelsysteem.service.RestaurantService;
 import bestelsysteem.service.TafelService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Objects;
@@ -27,49 +30,50 @@ public class RestaurantController {
 
     private final GerechtRepository gerechtRepository;
 
-    private final AllergenenService allergenenService;
-
     public RestaurantController(RestaurantService restaurantService,
                                 RestaurantRepository restaurantRepository,
                                 TafelService tafelService,
                                 TafelRepository tafelRepository,
-                                GerechtRepository gerechtRepository,
-                                AllergenenService allergenenService) {
+                                GerechtRepository gerechtRepository) {
         this.restaurantService = restaurantService;
         this.restaurantRepository = restaurantRepository;
         this.tafelService = tafelService;
         this.tafelRepository = tafelRepository;
         this.gerechtRepository = gerechtRepository;
-        this.allergenenService = allergenenService;
     }
 
     @GetMapping("restaurant/{restaurantId}/menu")
     public Menu getMenu(@PathVariable("restaurantId") int restaurantId) {
-        return gerechtRepository.findMenu(restaurantId).orElse(null);
+        return gerechtRepository.findMenu(restaurantId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "menu voor restaurant niet gevonden"));
     }
 
     @GetMapping("/restaurant/{restaurantId}/menu/filter")
     public Menu getMenuGefilterdOp(@PathVariable("restaurantId") int restaurantId,
                                    @RequestParam("condities") Set<VoedingRestrictie> condities) {
-        Menu menu = getMenu(restaurantId);
         /* 3. PLACEHOLDER: implementeer het filteren van de gerechten in het menu op basis van `allergenenService` */
-        return menu;
+        return null;
     }
 
     @PutMapping("/restaurant/{restaurantId}/winkelmand")
     public int getNieuweWinkelmand(@PathVariable("restaurantId") int restaurantId) {
-        return restaurantRepository.findById(restaurantId).map(restaurant -> {
-            bestelsysteem.model.Winkelmand winkelmand = restaurant.maakWinkelmand();
-            restaurantRepository.save(restaurant);
-            return winkelmand.id();
-        }).orElse(-1);
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "restaurant niet gevonden"));
+
+        bestelsysteem.model.Winkelmand winkelmand = restaurant.maakWinkelmand();
+        restaurantRepository.save(restaurant);
+        return winkelmand.id();
     }
 
     @GetMapping("/restaurant/{restaurantId}/winkelmand/{winkelmandId}")
     public Winkelmand getWinkelmand(@PathVariable("restaurantId") int restaurantId,
                                     @PathVariable("winkelmandId") int winkelmandId) {
-        return restaurantRepository.findById(restaurantId).flatMap(restaurant ->
-                restaurant.getWinkelmand(winkelmandId).map(this::converteerWinkelmandNaarDTO)).orElse(null);
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "restaurant niet gevonden"));
+        bestelsysteem.model.Winkelmand winkelmand = restaurant.getWinkelmand(winkelmandId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "winkelmand niet gevonden"));
+
+        return converteerWinkelmandNaarDTO(winkelmand);
     }
 
     @PostMapping("/restaurant/{restaurantId}/winkelmand/{winkelmandId}")
@@ -90,31 +94,28 @@ public class RestaurantController {
     public Bestelling getBestelling(@PathVariable("restaurantId") int restaurantId,
                                     @PathVariable("tafelnummer") int tafelNummer,
                                     @PathVariable("bestelnummer") int bestelnummer) {
-        return findTafelByRestaurant(restaurantId, tafelNummer)
-                .flatMap(tafel -> tafelService.getBestelling(tafel, bestelnummer)).orElse(null);
+        return tafelService.getBestelling(findTafelByRestaurant(restaurantId, tafelNummer), bestelnummer);
     }
 
     @GetMapping("/restaurant/{restaurantId}/tafel/{tafelnummer}/rekening")
     public double getRekening(@PathVariable("restaurantId") int restaurantId,
                               @PathVariable("tafelnummer") int tafelNummer) {
-        return findTafelByRestaurant(restaurantId, tafelNummer).map(Tafel::getRekening).orElse(0.0);
+        return findTafelByRestaurant(restaurantId, tafelNummer).getRekening();
     }
 
     @PostMapping("/restaurant/{restaurantId}/tafel/{tafelnummer}/rekening")
     public double betaalRekening(@PathVariable("restaurantId") int restaurantId,
                                  @PathVariable("tafelnummer") int tafelNummer,
                                  @RequestBody Betaling betaling) {
-        return findTafelByRestaurant(restaurantId, tafelNummer).map(tafel -> {
-            // als er geen openstaande rekening is, dan krijg je het geld gewoon weer terug
-            double wisselgeld = tafel.betaalRekening(betaling.bedrag());
-            tafelRepository.save(tafel);
-            return wisselgeld > 0.05 ? wisselgeld : 0.0;
-        }).orElse(0.0);
+        Tafel tafelByRestaurant = findTafelByRestaurant(restaurantId, tafelNummer);
+        double wisselgeld = tafelByRestaurant.betaalRekening(betaling.bedrag());
+        tafelRepository.save(tafelByRestaurant);
+        return wisselgeld;
     }
 
-    private Optional<Tafel> findTafelByRestaurant(int restaurantId, int tafelNummer) {
+    private Tafel findTafelByRestaurant(int restaurantId, int tafelNummer) {
         /* 1. PLACEHOLDER: implementeer het vinden van de juiste Tafel */
-        return Optional.empty();
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "tafel in restaurant niet gevonden");
     }
 
     //TODO: zou dit naar een service moeten, bijvoorbeeld restaurantService?
