@@ -1,6 +1,8 @@
 package bestelsysteem.service;
 
+import bestelsysteem.dto.BestelRegel;
 import bestelsysteem.dto.Bestelling;
+import bestelsysteem.model.Gerecht;
 import bestelsysteem.model.Tafel;
 import bestelsysteem.repository.GerechtRepository;
 import org.springframework.http.HttpStatus;
@@ -23,14 +25,15 @@ public class TafelServiceImpl implements TafelService {
         bestelsysteem.model.Bestelling bestelling = tafel.getBestelling(bestelnummer)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "bestelling niet gevonden"));
 
-        List<String> collect = bestelling.getGerechten().stream()
-                .map(bestellingGerecht -> gerechtRepository.findById(
-                                Objects.requireNonNull(bestellingGerecht.gerecht().getId()))
-                        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                                String.format("gerecht %d in bestelling niet bestaand",
-                                        bestellingGerecht.gerecht().getId())))
-                        .naam())
-                .toList();
-        return new Bestelling(bestelling.getBestelnummer(), collect);
+        List<bestelsysteem.dto.BestelRegel> collect = bestelling.getGerechten().stream()
+                .map(bestellingGerecht -> {
+                    Gerecht gerecht = gerechtRepository.findById(
+                                    Objects.requireNonNull(bestellingGerecht.gerecht().getId()))
+                            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                                    String.format("gerecht %d in bestelling niet bestaand",
+                                            bestellingGerecht.gerecht().getId())));
+                    return new BestelRegel(gerecht.naam(), bestellingGerecht.aantal());
+                }).toList();
+        return new Bestelling(bestelling.getBestelnummer(), bestelling.getStatus(), collect);
     }
 }

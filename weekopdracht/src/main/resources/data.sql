@@ -1,10 +1,13 @@
 -- Inserting data into Restaurant table
 INSERT INTO Restaurant(versie) VALUES (1);
+INSERT INTO Restaurant(versie) VALUES (2);
 
 -- Inserting data into Gerecht table
 INSERT INTO Gerecht (restaurant, naam, prijs, gang) VALUES (1, 'Spaghetti_Bolognese', 9.99, 'HOOFDGERECHT');
 INSERT INTO Gerecht (restaurant, naam, prijs, gang) VALUES (1, 'Caesar_Salad', 8.49, 'HOOFDGERECHT');
 INSERT INTO Gerecht (restaurant, naam, prijs, gang) VALUES (1, 'Margherita_Pizza', 10.99, 'HOOFDGERECHT');
+
+INSERT INTO Gerecht (restaurant, naam, prijs, gang) VALUES (2, 'Spaghetti_Bolognese', 15.99, 'HOOFDGERECHT');
 
 -- Inserting data into Ingredient table
 INSERT INTO Ingredient (naam) VALUES ('Spaghetti');
@@ -29,8 +32,14 @@ INSERT INTO Dosering (gerecht, ingredient, hoeveelheid) VALUES (3, 7, 1); -- 1 p
 INSERT INTO Dosering (gerecht, ingredient, hoeveelheid) VALUES (3, 2, 200); -- 200 grams of tomato sauce for Margherita Pizza
 INSERT INTO Dosering (gerecht, ingredient, hoeveelheid) VALUES (3, 8, 300); -- 300 grams of mozzarella cheese for Margherita Pizza
 
+INSERT INTO Dosering (gerecht, ingredient, hoeveelheid) VALUES (4, 1, 200); -- 200 grams of spaghetti for Spaghetti Bolognese
+INSERT INTO Dosering (gerecht, ingredient, hoeveelheid) VALUES (4, 2, 300); -- 300 grams of tomato sauce for Spaghetti Bolognese
+INSERT INTO Dosering (gerecht, ingredient, hoeveelheid) VALUES (4, 3, 400); -- 400 grams of ground beef for Spaghetti Bolognese
+
 -- Inserting data into Tafel table
 INSERT INTO Tafel(restaurant, tafel_nummer) VALUES ( 1, 1 );
 INSERT INTO Tafel(restaurant, tafel_nummer) VALUES ( 1, 3 );
 INSERT INTO Tafel(restaurant, tafel_nummer) VALUES ( 1, 4 );
 INSERT INTO Tafel(restaurant, tafel_nummer) VALUES ( 1, 5 );
+
+INSERT INTO Tafel(restaurant, tafel_nummer) VALUES ( 2, 1 );

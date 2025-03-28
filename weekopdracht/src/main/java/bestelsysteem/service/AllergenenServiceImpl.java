@@ -14,11 +14,9 @@ public class AllergenenServiceImpl implements AllergenenService {
         Set<VoedingRestrictie> restrictiesIngredient = new HashSet<>();
         switch (ingredientNaam) {
             case "Parmesan Cheese", "Mozzarella Cheese" -> restrictiesIngredient.add(VoedingRestrictie.LACTOSE);
-            case "Croutons" -> {
-                restrictiesIngredient.add(VoedingRestrictie.NOTEN);
-                restrictiesIngredient.add(VoedingRestrictie.GLUTEN);
-            }
-            case "Spaghetti" -> restrictiesIngredient.add(VoedingRestrictie.GLUTEN);
+            case "Spaghetti", "Tomato Sauce", "Ground Beef" -> restrictiesIngredient.add(VoedingRestrictie.GLUTEN);
+            case "Pizza Dough" -> {}
+            default -> restrictiesIngredient.add(VoedingRestrictie.NIKS); // Lettuce, Croutons
         }
         return restrictiesIngredient;
     }
