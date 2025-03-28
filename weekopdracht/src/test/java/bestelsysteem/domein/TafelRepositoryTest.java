@@ -34,7 +34,7 @@ public class TafelRepositoryTest {
     @Test
     public void testMaakBestelling() {
         //ARRANGE
-        Gerecht gerecht = gerechtRepository.findByNaam("Spaghetti_Bolognese").orElse(null);
+        Gerecht gerecht = gerechtRepository.findByRestaurantAndNaam(1,"Spaghetti_Bolognese").orElse(null);
         Assertions.assertNotNull(gerecht);
         Optional<Tafel> tafelOptional = tafelRepository.findById(1);
         Assertions.assertTrue(tafelOptional.isPresent());
@@ -57,7 +57,7 @@ public class TafelRepositoryTest {
     @Test
     public void testGetRekening() {
         //ARRANGE
-        Optional<Gerecht> gerecht = gerechtRepository.findByNaam("Spaghetti_Bolognese");
+        Optional<Gerecht> gerecht = gerechtRepository.findByRestaurantAndNaam(1,"Spaghetti_Bolognese");
         Assertions.assertTrue(gerecht.isPresent());
         Optional<Tafel> tafelOptional = tafelRepository.findById(1);
         Assertions.assertTrue(tafelOptional.isPresent());
@@ -77,7 +77,7 @@ public class TafelRepositoryTest {
     @Test
     public void testBetaalRekening() {
         //ARRANGE
-        Optional<Gerecht> gerecht = gerechtRepository.findByNaam("Spaghetti_Bolognese");
+        Optional<Gerecht> gerecht = gerechtRepository.findByRestaurantAndNaam(1,"Spaghetti_Bolognese");
         Assertions.assertTrue(gerecht.isPresent());
         Optional<Tafel> tafelOptional = tafelRepository.findById(1);
         Assertions.assertTrue(tafelOptional.isPresent());

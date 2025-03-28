@@ -18,7 +18,7 @@ public class GerechtRepositoryTest {
     @Test
     public void testFindByNaam() {
         //ACT
-        Optional<Gerecht> gerecht = gerechtRepository.findByNaam("Spaghetti_Bolognese");
+        Optional<Gerecht> gerecht = gerechtRepository.findByRestaurantAndNaam(1, "Spaghetti_Bolognese");
         //ASSERT
         Assertions.assertTrue(gerecht.isPresent());
     }

@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 public interface GerechtRepository extends CrudRepository<Gerecht, Integer> {
-    Optional<Gerecht> findByNaam(String naam);
+    Optional<Gerecht> findByRestaurantAndNaam(int restaurantId, String naam);
 
     @Query(value = """
         SELECT  g.id AS gerecht_id,

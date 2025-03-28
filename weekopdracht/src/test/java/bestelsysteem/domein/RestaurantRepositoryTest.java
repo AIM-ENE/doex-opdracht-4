@@ -1,6 +1,8 @@
 package bestelsysteem.domein;
 
-import bestelsysteem.model.*;
+import bestelsysteem.model.Gerecht;
+import bestelsysteem.model.Restaurant;
+import bestelsysteem.model.Winkelmand;
 import bestelsysteem.repository.GerechtRepository;
 import bestelsysteem.repository.RestaurantRepository;
 import org.junit.jupiter.api.Assertions;
@@ -44,10 +46,10 @@ public class RestaurantRepositoryTest {
     @Test
     public void testToevoegenWinkelmand() {
         //ARRANGE
-        Optional<Gerecht> gerechtOptional = gerechtRepository.findByNaam("Spaghetti_Bolognese");
+        Optional<Gerecht> gerechtOptional = gerechtRepository.findByRestaurantAndNaam(1,"Spaghetti_Bolognese");
         Assertions.assertTrue(gerechtOptional.isPresent());
         Gerecht gerecht = gerechtOptional.get();
-        Optional<Gerecht> gerechtOptional2 = gerechtRepository.findByNaam("Caesar_Salad");
+        Optional<Gerecht> gerechtOptional2 = gerechtRepository.findByRestaurantAndNaam(1,"Caesar_Salad");
         Assertions.assertTrue(gerechtOptional2.isPresent());
         Gerecht gerecht2 = gerechtOptional2.get();
         Optional<Restaurant> restaurantOptional = restaurantRepository.findById(1);

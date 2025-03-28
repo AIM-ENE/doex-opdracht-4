@@ -27,9 +27,9 @@ public class RestaurantServiceImpl implements RestaurantService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "winkelmand niet gevonden"));
 
         for(String gerechtNaam : gerechtNamen) {
-            bestelsysteem.model.Gerecht gerecht = gerechtRepository.findByNaam(gerechtNaam)
+            bestelsysteem.model.Gerecht gerecht = gerechtRepository.findByRestaurantAndNaam(restaurantId, gerechtNaam)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                            String.format("gerecht '%s' niet gevonden", gerechtNaam)));
+                            String.format("gerecht '%s' niet gevonden voor restaurant %d", gerechtNaam, restaurantId)));
 
             winkelmand.voegGerechtToe(gerecht);
         }
