@@ -10,13 +10,14 @@ is in een domain storytelling sessie een fine-grained domain story opgesteld.
 we kunnen op basis hiervan user stories opstellen bij de verschillende activiteiten:
 1. Als gast wil ik inloggen met mijn tafelnummer zodat mijn bestellingen op de juiste plek terecht zullen komen
 2. Als gast wil ik de menukaart kunnen bekijken zodat ik een gerecht naar wens kan uitkiezen
-3. Als een gast wil ik de menukaart kunnen filteren op basis van voedingsrestricties zodat ik alleen gerechten zie met die criteria
-4. Als gast wil ik details van een gerecht kunnen bekijken zodat ik weet wat voor ingrediënten daarin zitten
-5. Als gast wil ik een gekozen gerecht van de menukaart toevoegen aan de winkelmand zodat deze besteld kan worden
-6. Als gast wil ik een winkelmand kunnen omzetten naar bestelling zodat ik deze geserveerd krijg
+3. Als gast wil ik details van een gerecht kunnen bekijken zodat ik weet wat voor ingrediënten daarin zitten
+4. Als gast wil ik een gekozen gerecht van de menukaart toevoegen aan de winkelmand zodat deze besteld kan worden
+5. Als gast wil ik een winkelmand kunnen omzetten naar bestelling zodat ik deze geserveerd krijg
 
 > Alternatieven die ter sprake kwamen tijdens de sessie:
 >
+> - Als gast wil ik de menukaart kunnen filteren op basis van voedingsrestricties zodat ik alleen gerechten zie met die criteria
+> 
 > - Als gast wil ik het formaat van een gerecht kunnen kiezen zodat ik een portie van gewenst formaat krijg
 >
 > - Als gast wil ik een gerecht kunnen verwijderen uit mijn winkelwagen zodat ik een fout kan corrigeren
